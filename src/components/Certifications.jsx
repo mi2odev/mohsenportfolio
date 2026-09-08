@@ -9,7 +9,7 @@ export default function Certifications() {
 
   return (
     <section id="certifications" style={{ ...section, background: C.surface }}>
-      <div style={wrap(900)}>
+      <div style={wrap()}>
         <SectionHead num="07" label="Certifications" />
         <h2 data-reveal="0" style={{ ...h2, margin: '0 0 clamp(28px,3.5vw,44px)' }}>
           Workshops &amp; Certifications

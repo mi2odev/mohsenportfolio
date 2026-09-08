@@ -116,6 +116,12 @@ img, svg { display: block; }
   transform: translateY(-3px);
 }
 
+/* The icon tile picks up the accent as the whole skill card lifts. */
+.skill-card:hover .skill-icon {
+  border-color: var(--c-green);
+  background: rgba(16, 185, 129, .08);
+}
+
 /* Journey stage picker — a real button that should look like plain content. */
 .stage-btn {
   background: transparent;

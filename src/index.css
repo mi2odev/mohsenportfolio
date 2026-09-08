@@ -144,6 +144,51 @@ img, svg { display: block; }
 
 .panel-in { animation: panelIn .3s var(--ease-out) both; }
 
+/* ---------- print: a plain, ink-friendly version of the page ---------- */
+
+/* Anything that is pure decoration once there is nothing to click. */
+@media print {
+  header,
+  footer,
+  .skip-link,
+  .no-print,
+  svg,
+  [data-amb] {
+    display: none !important;
+  }
+
+  @page { margin: 14mm; }
+
+  body { background: #FFFFFF; }
+
+  section {
+    break-inside: avoid;
+    padding: 10mm 0 !important;
+    background: #FFFFFF !important;
+    box-shadow: none !important;
+  }
+
+  /* The dark call-to-action band would print as a solid block of ink. */
+  #objective { background: #FFFFFF !important; }
+  #objective h2,
+  #objective p,
+  #objective span { color: #000000 !important; }
+
+  a { color: #000000; }
+  /* Spell out where a link pointed, since it cannot be followed. */
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 10px;
+    word-break: break-all;
+  }
+
+  /* Reveal-on-scroll leaves inline opacity behind if the page prints early. */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: .01ms !important;

@@ -19,8 +19,8 @@ import Objective from './components/Objective.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
 
-const NAV_IDS = NAV.map(([, id]) => id);
-const STAT_TARGETS = STATS.map(([value]) => value);
+const NAV_IDS = NAV.map(n => n.id);
+const STAT_TARGETS = STATS.map(s => s.value);
 const MOBILE_NAV_ID = 'mobile-nav';
 
 export default function App({ statusOpen = true, heroPortrait = true, ambientMotion = true }) {
@@ -47,10 +47,10 @@ export default function App({ statusOpen = true, heroPortrait = true, ambientMot
 
   const navLinks = useMemo(
     () =>
-      NAV.map(([label, id], i) => ({
-        label,
-        href: '#' + id,
-        current: active === id,
+      NAV.map((item, i) => ({
+        label: item.label,
+        href: '#' + item.id,
+        current: active === item.id,
         num: pad(i + 1),
         delay: 60 + i * 55 + 'ms'
       })),
@@ -58,7 +58,7 @@ export default function App({ statusOpen = true, heroPortrait = true, ambientMot
   );
 
   const stats = useMemo(
-    () => STATS.map(([, suffix, label], i) => ({ label, shown: counts[i] + suffix })),
+    () => STATS.map((s, i) => ({ label: s.label, shown: counts[i] + s.suffix })),
     [counts]
   );
 
@@ -70,6 +70,7 @@ export default function App({ statusOpen = true, heroPortrait = true, ambientMot
 
       <div
         aria-hidden="true"
+        className="no-print"
         style={{
           position: 'fixed',
           top: 0,

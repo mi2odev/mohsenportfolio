@@ -1,19 +1,28 @@
+/**
+ * All of the site's content. Every section reads from here, so editing this
+ * file is enough to update the page — no component changes needed.
+ *
+ * `icon` keys must exist in the ICONS map at the bottom of components/Icons.jsx.
+ */
+
+/** Header and mobile menu links. `id` must match a section's id attribute. */
 export const NAV = [
-  ['Home', 'home'],
-  ['About', 'about'],
-  ['Education', 'education'],
-  ['Experience', 'experience'],
-  ['Skills', 'skills'],
-  ['Research', 'research'],
-  ['Certifications', 'certifications'],
-  ['Contact', 'contact']
+  { label: 'Home', id: 'home' },
+  { label: 'About', id: 'about' },
+  { label: 'Education', id: 'education' },
+  { label: 'Experience', id: 'experience' },
+  { label: 'Skills', id: 'skills' },
+  { label: 'Research', id: 'research' },
+  { label: 'Certifications', id: 'certifications' },
+  { label: 'Contact', id: 'contact' }
 ];
 
+/** Counters in the About section. They animate from 0 up to `value`. */
 export const STATS = [
-  [5, '+', 'Years of Biotechnology Education'],
-  [4, '', 'Laboratory & Research Experiences'],
-  [7, '', 'Certificates & Workshops'],
-  [3, '', 'Languages']
+  { value: 5, suffix: '+', label: 'Years of Biotechnology Education' },
+  { value: 4, suffix: '', label: 'Laboratory & Research Experiences' },
+  { value: 7, suffix: '', label: 'Certificates & Workshops' },
+  { value: 3, suffix: '', label: 'Languages' }
 ];
 
 export const EDUCATION = [
@@ -22,7 +31,12 @@ export const EDUCATION = [
     badge: 'Graduated with distinction',
     title: "Master's in Microbial Biotechnology",
     school: 'National Higher School of Biotechnology – Taoufik Kheznadar',
-    tags: ['Advanced Genetic Engineering', 'Industrial Microbiology', 'Bioprocess Scale-up', 'Metabolic Engineering'],
+    tags: [
+      'Advanced Genetic Engineering',
+      'Industrial Microbiology',
+      'Bioprocess Scale-up',
+      'Metabolic Engineering'
+    ],
     note: 'Application of molecular tools and optimization strategies for microbial systems, reinforcing hands-on expertise in genetic manipulation and strain development.'
   },
   {
@@ -31,66 +45,163 @@ export const EDUCATION = [
     title: 'State Engineer in Biotechnology',
     school: 'National Higher School of Biotechnology – Taoufik Kheznadar',
     tags: [
-      'Bioprocess Engineering', 'Bioreactor Design', 'Transport Phenomena', 'Unit Operations',
-      'Aseptic Techniques', 'Culture Media Formulation', 'Upstream Processing Control', 'Process Troubleshooting'
+      'Bioprocess Engineering',
+      'Bioreactor Design',
+      'Transport Phenomena',
+      'Unit Operations',
+      'Aseptic Techniques',
+      'Culture Media Formulation',
+      'Upstream Processing Control',
+      'Process Troubleshooting'
     ],
     note: ''
   }
 ];
 
 export const SKILLS = [
-  ['reactor', 'Bioreactor Operations'],
-  ['chart', 'Bioprocess Optimization'],
-  ['culture', 'Microbial Culture Techniques'],
-  ['upstream', 'Upstream Processing'],
-  ['downstream', 'Downstream Processing'],
-  ['check', 'Quality Control'],
-  ['shield', 'Quality Assurance'],
-  ['wrench', 'Technical Troubleshooting'],
-  ['peaks', 'Proteomics'],
-  ['network', 'Molecular Biotechnology'],
-  ['helix', 'Genetic Engineering'],
-  ['flask', 'Pharmaceutical & Chemical Analysis']
+  { icon: 'reactor', label: 'Bioreactor Operations' },
+  { icon: 'chart', label: 'Bioprocess Optimization' },
+  { icon: 'culture', label: 'Microbial Culture Techniques' },
+  { icon: 'upstream', label: 'Upstream Processing' },
+  { icon: 'downstream', label: 'Downstream Processing' },
+  { icon: 'check', label: 'Quality Control' },
+  { icon: 'shield', label: 'Quality Assurance' },
+  { icon: 'wrench', label: 'Technical Troubleshooting' },
+  { icon: 'peaks', label: 'Proteomics' },
+  { icon: 'network', label: 'Molecular Biotechnology' },
+  { icon: 'helix', label: 'Genetic Engineering' },
+  { icon: 'flask', label: 'Pharmaceutical & Chemical Analysis' }
 ];
 
+/** `tone` tints the badge: 'blue' for industry placements, 'green' for research. */
 export const EXPERIENCE = [
-  ['microscope', '2025', 'Pasteur Institute', 'Professional Internship', 'blue', 'Quality Control (QC) & Microbiology'],
-  ['testtube', '2023', 'isopharm', 'Professional Internship', 'blue', 'Quality Control (QC) & Quality Assurance'],
-  ['peaks', '2024', 'Biotechnology Research Center (CRBt)', 'Research Internship', 'green', 'Proteomics & Advanced Biotechnology'],
-  ['flask', '2024', 'Scientific Police Laboratories', 'Certificate of Practical Training', 'green', 'Pharmaceutical & Chemical Analysis']
+  {
+    icon: 'microscope',
+    year: '2025',
+    org: 'Pasteur Institute',
+    kind: 'Professional Internship',
+    tone: 'blue',
+    detail: 'Quality Control (QC) & Microbiology'
+  },
+  {
+    icon: 'testtube',
+    year: '2023',
+    org: 'isopharm',
+    kind: 'Professional Internship',
+    tone: 'blue',
+    detail: 'Quality Control (QC) & Quality Assurance'
+  },
+  {
+    icon: 'peaks',
+    year: '2024',
+    org: 'Biotechnology Research Center (CRBt)',
+    kind: 'Research Internship',
+    tone: 'green',
+    detail: 'Proteomics & Advanced Biotechnology'
+  },
+  {
+    icon: 'flask',
+    year: '2024',
+    org: 'Scientific Police Laboratories',
+    kind: 'Certificate of Practical Training',
+    tone: 'green',
+    detail: 'Pharmaceutical & Chemical Analysis'
+  }
 ];
 
+/** The interactive flow in the Journey section, in order. */
 export const STAGES = [
-  ['culture', 'Microbial Culture', 'Growth of a selected microbial strain under controlled conditions to produce the working cell bank and inoculum.'],
-  ['upstream', 'Upstream Processing', 'All steps preceding the main production run: media preparation, sterilisation, inoculum expansion and process setup.'],
-  ['reactor', 'Bioreactor', 'The controlled vessel where cells are cultivated at scale, with regulation of temperature, pH, dissolved oxygen and agitation.'],
-  ['downstream', 'Downstream Processing', 'Recovery of the target product from the culture broth through cell separation, lysis and initial concentration.'],
-  ['purify', 'Purification', 'Removal of remaining impurities, typically by chromatography and filtration, until the product meets its specification.'],
-  ['check', 'Quality Control', 'Analytical testing of identity, purity, potency and safety against defined acceptance criteria before release.'],
-  ['product', 'Biopharmaceutical Product', 'The formulated, filled and released drug substance or drug product, documented for regulatory compliance.']
+  {
+    icon: 'culture',
+    label: 'Microbial Culture',
+    detail:
+      'Growth of a selected microbial strain under controlled conditions to produce the working cell bank and inoculum.'
+  },
+  {
+    icon: 'upstream',
+    label: 'Upstream Processing',
+    detail:
+      'All steps preceding the main production run: media preparation, sterilisation, inoculum expansion and process setup.'
+  },
+  {
+    icon: 'reactor',
+    label: 'Bioreactor',
+    detail:
+      'The controlled vessel where cells are cultivated at scale, with regulation of temperature, pH, dissolved oxygen and agitation.'
+  },
+  {
+    icon: 'downstream',
+    label: 'Downstream Processing',
+    detail:
+      'Recovery of the target product from the culture broth through cell separation, lysis and initial concentration.'
+  },
+  {
+    icon: 'purify',
+    label: 'Purification',
+    detail:
+      'Removal of remaining impurities, typically by chromatography and filtration, until the product meets its specification.'
+  },
+  {
+    icon: 'check',
+    label: 'Quality Control',
+    detail:
+      'Analytical testing of identity, purity, potency and safety against defined acceptance criteria before release.'
+  },
+  {
+    icon: 'product',
+    label: 'Biopharmaceutical Product',
+    detail:
+      'The formulated, filled and released drug substance or drug product, documented for regulatory compliance.'
+  }
 ];
 
 export const CERTS = [
-  ['Downstream Processing (DSP) & Protein Purification', 'ENSB', '2026'],
-  ['Upstream Processing (USP) & Antibiotic Fermentation', 'ENSB', '2026'],
-  ['Molecular Docking & Computer-Aided Drug Design', 'ENSB', '2025'],
-  ['Quality Control (QC) & Microbiology', 'Pasteur Institute', '2025'],
-  ['Pharmaceutical & Chemical Analysis', 'Scientific Police Laboratories', '2024'],
-  ['Proteomics & Advanced Biotechnology', 'Biotechnology Research Center (CRBt)', '2024'],
-  ['Quality Control (QC) & Quality Assurance', 'isopharm', '2023']
+  { title: 'Downstream Processing (DSP) & Protein Purification', org: 'ENSB', year: '2026' },
+  { title: 'Upstream Processing (USP) & Antibiotic Fermentation', org: 'ENSB', year: '2026' },
+  { title: 'Molecular Docking & Computer-Aided Drug Design', org: 'ENSB', year: '2025' },
+  { title: 'Quality Control (QC) & Microbiology', org: 'Pasteur Institute', year: '2025' },
+  {
+    title: 'Pharmaceutical & Chemical Analysis',
+    org: 'Scientific Police Laboratories',
+    year: '2024'
+  },
+  {
+    title: 'Proteomics & Advanced Biotechnology',
+    org: 'Biotechnology Research Center (CRBt)',
+    year: '2024'
+  },
+  { title: 'Quality Control (QC) & Quality Assurance', org: 'isopharm', year: '2023' }
 ];
 
 export const INTERESTS = [
-  'Microbial Biotechnology', 'Bioprocess Engineering', 'Industrial Microbiology', 'Upstream Processing',
-  'Downstream Processing', 'Genetic Engineering', 'Protein Purification', 'Pharmaceutical Biotechnology',
-  'Proteomics', 'Bioprocess Scale-up', 'Quality Control & Quality Assurance', 'Molecular Docking & Computer-Aided Drug Design'
+  'Microbial Biotechnology',
+  'Bioprocess Engineering',
+  'Industrial Microbiology',
+  'Upstream Processing',
+  'Downstream Processing',
+  'Genetic Engineering',
+  'Protein Purification',
+  'Pharmaceutical Biotechnology',
+  'Proteomics',
+  'Bioprocess Scale-up',
+  'Quality Control & Quality Assurance',
+  'Molecular Docking & Computer-Aided Drug Design'
 ];
 
+/** `lang` and `dir` tell a screen reader how to pronounce the native name. */
 export const LANGS = [
-  ['Arabic', 'العربية', 'AR', 'ع'],
-  ['French', 'Français', 'FR', 'F'],
-  ['English', 'English', 'EN', 'E']
+  { name: 'Arabic', native: 'العربية', code: 'AR', glyph: 'ع', lang: 'ar', dir: 'rtl' },
+  { name: 'French', native: 'Français', code: 'FR', glyph: 'F', lang: 'fr', dir: 'ltr' },
+  { name: 'English', native: 'English', code: 'EN', glyph: 'E', lang: 'en', dir: 'ltr' }
 ];
+
+/** The featured panel in the Research section. */
+export const RESEARCH = {
+  title: 'Microbial Systems Optimization',
+  summary:
+    'Application of molecular tools and optimization strategies for microbial systems, with emphasis on genetic manipulation and strain development.',
+  tags: ['Genetic Manipulation', 'Strain Development', 'Molecular Tools', 'Optimization']
+};
 
 export const EMAIL = 'mohcenmeradji@gmail.com';
 export const PHONE = '+213 697 330 205';

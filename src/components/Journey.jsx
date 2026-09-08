@@ -8,7 +8,7 @@ const PANEL_ID = 'journey-detail';
 
 export default function Journey() {
   const [active, setActive] = useState(2);
-  const [, activeLabel, activeText] = STAGES[active];
+  const stage = STAGES[active];
 
   return (
     <section id="journey" style={{ ...section, overflow: 'hidden' }}>
@@ -43,12 +43,12 @@ export default function Journey() {
             rowGap: 'clamp(18px,2.5vw,26px)'
           }}
         >
-          {STAGES.map(([key, label], i) => {
-            const Icon = ICONS[key];
+          {STAGES.map((s, i) => {
+            const Icon = ICONS[s.icon];
             const on = i === active;
             const pick = () => setActive(i);
             return (
-              <div key={label} style={{ display: 'contents' }}>
+              <div key={s.label} style={{ display: 'contents' }}>
                 <button
                   type="button"
                   className="stage-btn"
@@ -70,6 +70,7 @@ export default function Journey() {
                 >
                   <span
                     aria-hidden="true"
+                    className="no-print"
                     style={{
                       position: 'relative',
                       width: 'clamp(52px,6vw,64px)',
@@ -111,7 +112,7 @@ export default function Journey() {
                     {pad(i + 1)}
                   </span>
                   <span style={{ fontSize: 12.5, fontWeight: 600, lineHeight: 1.4, color: C.ink }}>
-                    {label}
+                    {s.label}
                   </span>
                 </button>
 
@@ -158,7 +159,7 @@ export default function Journey() {
           }}
         >
           <div style={mono(10, { letterSpacing: '0.14em', color: C.green })}>
-            {pad(active + 1)} — {activeLabel}
+            {pad(active + 1)} — {stage.label}
           </div>
           <p
             style={{
@@ -169,7 +170,7 @@ export default function Journey() {
               textWrap: 'pretty'
             }}
           >
-            {activeText}
+            {stage.detail}
           </p>
         </div>
       </div>

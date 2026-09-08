@@ -12,15 +12,16 @@ export default function Languages() {
         </h2>
 
         <div style={{ display: 'grid', gap: 16, gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,240px),1fr))' }}>
-          {LANGS.map(([name, native, code, glyph], i) => (
+          {LANGS.map((l, i) => (
             <div
-              key={name}
+              key={l.name}
               data-reveal={i * 80}
               className="lift-shadow"
               style={{ position: 'relative', overflow: 'hidden', padding: '26px 24px', borderRadius: 18, background: C.bg }}
             >
               <span
                 aria-hidden="true"
+                className="no-print"
                 style={{
                   position: 'absolute',
                   right: 6,
@@ -34,7 +35,7 @@ export default function Languages() {
                   userSelect: 'none'
                 }}
               >
-                {glyph}
+                {l.glyph}
               </span>
 
               <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 18 }}>
@@ -78,7 +79,7 @@ export default function Languages() {
                       color: C.deep
                     }}
                   >
-                    {code}
+                    {l.code}
                   </span>
                 </span>
 
@@ -96,9 +97,15 @@ export default function Languages() {
                       color: C.deep
                     }}
                   >
-                    {name}
+                    {l.name}
                   </div>
-                  <div style={{ marginTop: 4, fontSize: 13.5, color: C.muted }}>{native}</div>
+                  <div
+                    lang={l.lang}
+                    dir={l.dir}
+                    style={{ marginTop: 4, fontSize: 13.5, color: C.muted }}
+                  >
+                    {l.native}
+                  </div>
                 </div>
               </div>
             </div>

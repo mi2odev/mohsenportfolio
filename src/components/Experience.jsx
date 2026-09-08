@@ -13,11 +13,12 @@ export default function Experience() {
         </h2>
 
         <div style={{ display: 'grid', gap: 16, gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,390px),1fr))' }}>
-          {EXPERIENCE.map(([key, year, org, kind, tone, detail], i) => {
-            const Icon = ICONS[key];
+          {EXPERIENCE.map((job, i) => {
+            const Icon = ICONS[job.icon];
+            const blue = job.tone === 'blue';
             return (
               <div
-                key={org}
+                key={job.org}
                 data-reveal={(i % 2) * 60}
                 className="lift"
                 style={{
@@ -30,6 +31,8 @@ export default function Experience() {
                 }}
               >
                 <div
+                  aria-hidden="true"
+                  className="no-print"
                   style={{
                     flex: '0 0 auto',
                     width: 46,
@@ -46,7 +49,7 @@ export default function Experience() {
                 </div>
 
                 <div style={{ minWidth: 0 }}>
-                  <div style={mono(10, { color: C.green })}>{year}</div>
+                  <div style={mono(10, { color: C.green })}>{job.year}</div>
                   <h3
                     style={{
                       margin: '8px 0 0',
@@ -58,7 +61,7 @@ export default function Experience() {
                       color: C.deep
                     }}
                   >
-                    {org}
+                    {job.org}
                   </h3>
                   <div
                     style={{
@@ -66,16 +69,15 @@ export default function Experience() {
                       display: 'inline-flex',
                       padding: '5px 11px',
                       borderRadius: 999,
-                      background: tone === 'blue' ? 'rgba(37,99,235,.08)' : 'rgba(16,185,129,.1)',
-                      ...mono(10, {
-                        letterSpacing: '0.1em',
-                        color: tone === 'blue' ? C.blue : C.deep
-                      })
+                      background: blue ? 'rgba(37,99,235,.08)' : 'rgba(16,185,129,.1)',
+                      ...mono(10, { letterSpacing: '0.1em', color: blue ? C.blue : C.deep })
                     }}
                   >
-                    {kind}
+                    {job.kind}
                   </div>
-                  <p style={{ margin: '14px 0 0', fontSize: 14.5, lineHeight: 1.65, color: C.muted }}>{detail}</p>
+                  <p style={{ margin: '14px 0 0', fontSize: 14.5, lineHeight: 1.65, color: C.muted }}>
+                    {job.detail}
+                  </p>
                 </div>
               </div>
             );

@@ -2,7 +2,11 @@
   "name": "mohcene-meradji-portfolio",
   "private": true,
   "version": "1.0.0",
+  "description": "Portfolio site for Mohcene Meradji, Bioprocess Engineer.",
   "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",

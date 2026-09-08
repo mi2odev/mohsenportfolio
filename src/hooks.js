@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 const REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
 
@@ -8,25 +8,37 @@ function matches(query) {
     : false;
 }
 
-/** Subscribes to a media query and re-renders when it flips. */
+/**
+ * Subscribes to a media query and re-renders when it flips.
+ *
+ * useSyncExternalStore rather than useState so that prerendered HTML hydrates
+ * cleanly: `initial` is what the build rendered, React hydrates against that,
+ * then swaps to the real match immediately afterwards. Reading matchMedia in a
+ * useState initializer instead would make the first client render disagree with
+ * the server HTML on any screen where the query does not match.
+ */
 export function useMediaQuery(query, initial = false) {
-  const [on, setOn] = useState(() => (typeof window === 'undefined' ? initial : matches(query)));
+  const subscribe = useCallback(
+    onChange => {
+      if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+        return () => {};
+      }
+      const mql = window.matchMedia(query);
+      // Safari < 14 only has the deprecated add/removeListener pair.
+      if (mql.addEventListener) mql.addEventListener('change', onChange);
+      else mql.addListener(onChange);
+      return () => {
+        if (mql.removeEventListener) mql.removeEventListener('change', onChange);
+        else mql.removeListener(onChange);
+      };
+    },
+    [query]
+  );
 
-  useEffect(() => {
-    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return;
-    const mql = window.matchMedia(query);
-    const onChange = e => setOn(e.matches);
-    setOn(mql.matches);
-    // Safari < 14 only has the deprecated add/removeListener pair.
-    if (mql.addEventListener) mql.addEventListener('change', onChange);
-    else mql.addListener(onChange);
-    return () => {
-      if (mql.removeEventListener) mql.removeEventListener('change', onChange);
-      else mql.removeListener(onChange);
-    };
-  }, [query]);
+  const getSnapshot = useCallback(() => matches(query), [query]);
+  const getServerSnapshot = useCallback(() => initial, [initial]);
 
-  return on;
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
 /** True when the visitor asked the OS to tone animation down. */

@@ -25,13 +25,39 @@ npm run preview   # serve the built files locally
 `dist/` is a static folder — drop it on Netlify, Vercel, GitHub Pages, or any web host.
 `base: './'` in `vite.config.js` means it also works from a subfolder.
 
+`build` runs three steps: the normal client build, a small SSR build of
+`src/entry-server.jsx`, and `scripts/prerender.mjs`, which renders the page once and
+writes the markup into `dist/index.html`. The browser hydrates that markup instead of
+building the page from scratch, so the text paints as soon as the HTML arrives rather
+than after 200 kB of JavaScript has downloaded and run. Measured over seven loads
+each on a throttled mobile profile (9 Mbps, 170 ms RTT, 4× CPU slowdown), median
+first contentful paint went from 1.09 s to 0.84 s, and transfer from 352 kB to
+228 kB — the rest of that drop is the WebP images below. It also means the page is
+fully readable with JavaScript disabled or still loading.
+
+Prerendering is deliberately non-fatal: if that last step ever fails it prints a
+warning and leaves a working client-rendered `dist/`, so a broken prerender can never
+block a deploy. `main.jsx` checks whether `#root` already has markup and hydrates or
+mounts accordingly.
+
+Two things to keep in mind when editing:
+
+- The flags in `entry-server.jsx` must match the ones `main.jsx` passes, or the
+  prerendered markup will not match what the browser renders.
+- Anything that reads `window` during render (not in an effect) will differ between
+  the build and the browser. `useMediaQuery` handles this with `useSyncExternalStore`
+  and a server snapshot; follow that pattern rather than reading `matchMedia` in a
+  `useState` initializer.
+
 ## Structure
 
 ```
-index.html                 Meta tags, JSON-LD, Google Fonts, #root mount
+index.html                 Meta tags, JSON-LD, #root mount
 public/                    Copied to dist/ as-is: favicons, manifest, robots, share card
+scripts/prerender.mjs      Bakes the rendered page into dist/index.html
 src/
   main.jsx                 React entry; fonts, error boundary, display flags
+  entry-server.jsx         Build-time only: renders <App> to a markup string
   App.jsx                  Page shell: skip link, scroll bar, header, all sections
   fonts.css                @font-face for the three self-hosted variable fonts
   index.css                Tokens (CSS variables), resets, focus styles, print
@@ -137,12 +163,17 @@ selector list.
 
 ## Assets
 
-Photos are stored at roughly twice their largest rendered size and no more — the whole
-page ships about 180 KB of images. If you replace one, resize it first:
+Both photos ship as WebP at two widths inside a `<picture>`, with the JPEG as the
+fallback for the few browsers without WebP. A phone downloads the small WebP pair
+(29 KB) rather than the full-size JPEGs (153 KB).
 
 - `logo.png` — 480×320, never rendered taller than 72 px
-- `portrait.jpg` — 640×640, the circular hero photo
-- `presenting.jpg` — 1000×1000, cropped to 4:3 in the About card
+- `portrait.jpg` + `portrait-400.webp`, `portrait-640.webp` — the circular hero photo
+- `presenting.jpg` + `presenting-500.webp`, `presenting-1000.webp` — the About card
+
+If you replace a photo, regenerate every variant and keep the `sizes` attribute in
+`Hero.jsx` / `About.jsx` honest — it tells the browser how wide the image will actually
+be, and a wrong value makes it pick the wrong file.
 - `og-source.png` — the full-resolution share card artwork; it is not imported
   anywhere, so it never ships. Re-export it to `public/og-image.jpg` at 1200×630
   after editing.

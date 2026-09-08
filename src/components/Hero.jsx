@@ -1,7 +1,9 @@
 import { useMemo } from 'react';
 import { C, F, pill, mono, sectionBase } from '../theme.js';
 import { ArrowDown, DownloadIcon } from './Icons.jsx';
-import portrait from '../assets/portrait.jpg';
+import portraitJpg from '../assets/portrait.jpg';
+import portrait400 from '../assets/portrait-400.webp';
+import portrait640 from '../assets/portrait-640.webp';
 import cv from '../assets/Mohcene_Meradji_CV.pdf';
 
 const word = delay => ({
@@ -327,22 +329,30 @@ export default function Hero({ portraitOn }) {
                   boxShadow: '0 8px 30px rgba(11,61,46,.1)'
                 }}
               >
-                <img
-                  src={portrait}
-                  alt="Mohcene Meradji in the laboratory"
-                  width="640"
-                  height="640"
-                  decoding="async"
-                  fetchpriority="high"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    objectPosition: '50% 22%',
-                    borderRadius: '50%',
-                    display: 'block'
-                  }}
-                />
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcSet={`${portrait400} 400w, ${portrait640} 640w`}
+                    /* 54% of a box that is min(500px, 88vw) wide. */
+                    sizes="min(270px, 47.5vw)"
+                  />
+                  <img
+                    src={portraitJpg}
+                    alt="Mohcene Meradji in the laboratory"
+                    width="640"
+                    height="640"
+                    decoding="async"
+                    fetchpriority="high"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: '50% 22%',
+                      borderRadius: '50%',
+                      display: 'block'
+                    }}
+                  />
+                </picture>
               </div>
             )}
 

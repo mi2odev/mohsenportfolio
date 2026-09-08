@@ -1,6 +1,8 @@
 import { C, F, section, wrap, h2, mono, SHADOW } from '../theme.js';
 import SectionHead from './SectionHead.jsx';
-import presenting from '../assets/presenting.jpg';
+import presentingJpg from '../assets/presenting.jpg';
+import presenting500 from '../assets/presenting-500.webp';
+import presenting1000 from '../assets/presenting-1000.webp';
 
 const dt = mono(10, { color: C.muted });
 
@@ -66,15 +68,22 @@ export default function About({ stats, statsRef }) {
                 boxShadow: SHADOW
               }}
             >
-              <img
-                src={presenting}
-                alt="Mohcene Meradji presenting his work"
-                width="1000"
-                height="1000"
-                loading="lazy"
-                decoding="async"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '62% 30%' }}
-              />
+              <picture>
+                <source
+                  type="image/webp"
+                  srcSet={`${presenting500} 500w, ${presenting1000} 1000w`}
+                  sizes="(min-width: 900px) 420px, calc(100vw - 40px)"
+                />
+                <img
+                  src={presentingJpg}
+                  alt="Mohcene Meradji presenting his work"
+                  width="1000"
+                  height="1000"
+                  loading="lazy"
+                  decoding="async"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '62% 30%' }}
+                />
+              </picture>
             </div>
 
             <div

@@ -18,9 +18,9 @@ export default function Header({
         position: 'sticky',
         top: 0,
         zIndex: 100,
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        background: 'rgba(255,255,255,.65)',
+        backdropFilter: 'blur(16px) saturate(140%)',
+        WebkitBackdropFilter: 'blur(16px) saturate(140%)',
+        background: 'rgba(255,255,255,.9)',
         borderBottom: '1px solid ' + C.line
       }}
     >
@@ -37,7 +37,10 @@ export default function Header({
           gap: 16
         }}
       >
-        <a href="#home" style={{ display: 'flex', alignItems: 'center', gap: 10, flex: '0 0 auto' }}>
+        <a
+          href="#home"
+          style={{ display: 'flex', alignItems: 'center', minHeight: 44, gap: 10, flex: '0 0 auto' }}
+        >
           <img
             src={logo}
             alt="Mohcene Meradji"

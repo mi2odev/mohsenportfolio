@@ -86,7 +86,16 @@ export default function Footer() {
               © {new Date().getFullYear()} Mohcene Meradji — Bioprocess Engineer · Constantine, DZ
             </span>
           </div>
-          <a href="#home" style={mono(10, { color: C.green })}>
+          <a
+            href="#home"
+            style={{
+              ...mono(10, { color: C.green }),
+              display: 'inline-flex',
+              alignItems: 'center',
+              minHeight: 44,
+              padding: '0 2px'
+            }}
+          >
             Back to top ↑
           </a>
         </div>

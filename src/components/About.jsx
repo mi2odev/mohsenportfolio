@@ -102,7 +102,7 @@ export default function About({ stats, statsRef }) {
                   pointerEvents: 'none'
                 }}
                 fill="none"
-                stroke="#0B3D2E"
+                stroke={C.deep}
                 strokeWidth="2"
                 aria-hidden="true"
               >

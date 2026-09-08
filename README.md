@@ -33,9 +33,11 @@ public/                    Copied to dist/ as-is: favicons, manifest, robots, sh
 src/
   main.jsx                 React entry; passes the three display flags to <App>
   App.jsx                  Page shell: skip link, scroll bar, header, all sections
-  index.css                Tokens (CSS variables), resets, focus styles, keyframes
+  index.css                Tokens (CSS variables), resets, focus styles, print
+                           rules, keyframes
   theme.js                 Colors, font stacks, shared style objects and helpers
-  data.js                  All content: nav, stats, education, skills, certs, languages…
+  data.js                  All content: nav, stats, education, skills, experience,
+                           certs, interests, languages, research, contact details
   hooks.js                 Media queries, scroll spy, reveal-on-scroll, count-up,
                            motion toggle, scroll lock, escape key
   assets/                  Logo, photos, CV PDF
@@ -62,8 +64,23 @@ src/
 ## Editing content
 
 Text, dates, tags and links live in `src/data.js` — change them there and every section
-updates. Long-form copy (hero headline, bio, research blurb) sits inline in its own
-component.
+updates. Every entry uses named fields, so adding a job or a certificate is a matter of
+copying the block above it:
+
+```js
+export const EXPERIENCE = [
+  {
+    icon: 'microscope',            // a key from the ICONS map in components/Icons.jsx
+    year: '2025',
+    org: 'Pasteur Institute',
+    kind: 'Professional Internship',
+    tone: 'blue',                  // 'blue' for industry, 'green' for research
+    detail: 'Quality Control (QC) & Microbiology'
+  }
+];
+```
+
+Long-form copy (hero headline, bio, section headings) sits inline in its own component.
 
 Colors and font stacks live in `src/theme.js`. The same colors are mirrored as CSS
 custom properties at the top of `src/index.css` for the rules written in plain CSS —
@@ -92,6 +109,16 @@ change a colour in one place and change it in the other.
 - Every decorative shape, particle and rule is `aria-hidden`.
 - `prefers-reduced-motion` is respected and watched live: animations, the
   reveal-on-scroll effect and the stat count-up all turn off.
+- Native language names carry `lang` and `dir`, so a screen reader pronounces
+  العربية and Français correctly instead of reading them as English.
+
+## Printing
+
+`@media print` in `src/index.css` strips the header, footer, artwork and the dark
+call-to-action band, and spells out every external link's URL, so Ctrl+P produces a
+readable one-colour CV. Anything decorative that is not an `<svg>` carries a
+`no-print` class — add that class to new decoration rather than widening the
+selector list.
 
 ## Assets
 
@@ -101,11 +128,15 @@ page ships about 180 KB of images. If you replace one, resize it first:
 - `logo.png` — 480×320, never rendered taller than 72 px
 - `portrait.jpg` — 640×640, the circular hero photo
 - `presenting.jpg` — 1000×1000, cropped to 4:3 in the About card
+- `og-source.png` — the full-resolution share card artwork; it is not imported
+  anywhere, so it never ships. Re-export it to `public/og-image.jpg` at 1200×630
+  after editing.
 
 Replace the CV by overwriting `src/assets/Mohcene_Meradji_CV.pdf` (keep the filename)
 or update the import in `Hero.jsx` and `Contact.jsx`.
 
-The share card in `public/og-image.jpg` is 1200×630.
+The share card served to Facebook, LinkedIn and X is `public/og-image.jpg` at
+1200×630 — the standard size, and the one declared in `index.html`.
 
 ## Deploying
 

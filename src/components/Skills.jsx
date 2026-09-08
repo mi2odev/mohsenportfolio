@@ -13,23 +13,30 @@ export default function Skills() {
         </h2>
 
         <div style={{ display: 'grid', gap: 14, gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,258px),1fr))' }}>
-          {SKILLS.map(([key, label], i) => {
-            const Icon = ICONS[key];
+          {SKILLS.map((skill, i) => {
+            const Icon = ICONS[skill.icon];
             return (
               <div
-                key={label}
+                key={skill.label}
                 data-reveal={(i % 4) * 40}
                 className="lift-shadow"
                 style={{ padding: 22, borderRadius: 18, background: C.bg }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 22 }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    marginBottom: 22
+                  }}
+                >
                   <span aria-hidden="true" style={mono(10, { color: C.green })}>
                     {pad(i + 1)}
                   </span>
                   <Icon size={26} />
                 </div>
                 <div style={{ fontFamily: F.display, fontWeight: 600, fontSize: 15, lineHeight: 1.4, color: C.ink }}>
-                  {label}
+                  {skill.label}
                 </div>
               </div>
             );

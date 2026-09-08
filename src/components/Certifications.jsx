@@ -16,13 +16,13 @@ export default function Certifications() {
         </h2>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          {CERTS.map(([title, org, year], i) => {
+          {CERTS.map((cert, i) => {
             const isOpen = open === i;
             const panelId = 'cert-panel-' + i;
             const buttonId = 'cert-button-' + i;
             return (
               <div
-                key={title}
+                key={cert.title}
                 data-reveal={i * 55}
                 style={{
                   border: '1px solid ' + (isOpen ? C.green : C.line),
@@ -65,13 +65,14 @@ export default function Certifications() {
                       color: C.deep
                     }}
                   >
-                    {title}
+                    {cert.title}
                   </span>
                   <span style={{ flex: '0 0 auto', ...mono(10, { letterSpacing: '0.1em', color: C.muted }) }}>
-                    {year}
+                    {cert.year}
                   </span>
                   <span
                     aria-hidden="true"
+                    className="no-print"
                     style={{
                       flex: '0 0 auto',
                       width: 26,
@@ -107,7 +108,7 @@ export default function Certifications() {
                   }}
                 >
                   <span style={mono(10, { color: C.muted })}>Institution</span>
-                  <span style={{ fontSize: 14, fontWeight: 500, color: C.ink }}>{org}</span>
+                  <span style={{ fontSize: 14, fontWeight: 500, color: C.ink }}>{cert.org}</span>
                 </div>
               </div>
             );

@@ -1,7 +1,6 @@
 import { C, F, section, wrap, chip, mono, SHADOW } from '../theme.js';
 import SectionHead from './SectionHead.jsx';
-
-const TAGS = ['Genetic Manipulation', 'Strain Development', 'Molecular Tools', 'Optimization'];
+import { RESEARCH } from '../data.js';
 
 export default function Research() {
   return (
@@ -21,6 +20,7 @@ export default function Research() {
           }}
         >
           <div
+            className="no-print"
             style={{
               flex: '1 1 300px',
               minWidth: 0,
@@ -52,12 +52,12 @@ export default function Research() {
             >
               <defs>
                 <radialGradient id="mmGlow" cx="0.5" cy="0.5" r="0.5">
-                  <stop offset="0" stopColor="#10B981" stopOpacity="0.26" />
-                  <stop offset="1" stopColor="#10B981" stopOpacity="0" />
+                  <stop offset="0" stopColor={C.green} stopOpacity="0.26" />
+                  <stop offset="1" stopColor={C.green} stopOpacity="0" />
                 </radialGradient>
                 <linearGradient id="mmBond" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stopColor="#34D399" />
-                  <stop offset="1" stopColor="#2563EB" />
+                  <stop offset="0" stopColor={C.green2} />
+                  <stop offset="1" stopColor={C.blue} />
                 </linearGradient>
               </defs>
               <circle cx="150" cy="150" r="132" fill="url(#mmGlow)" />
@@ -71,7 +71,7 @@ export default function Research() {
                   <path d="M113.6 171 L113.6 129" opacity="0.55" />
                 </g>
                 <g
-                  stroke="#34D399"
+                  stroke={C.green2}
                   strokeWidth="1"
                   opacity="0.8"
                   strokeDasharray="4 6"
@@ -84,7 +84,7 @@ export default function Research() {
                   <path d="M196.8 123 L240 98" />
                   <path d="M103.2 177 L60 202" />
                 </g>
-                <g fill="#10B981">
+                <g fill={C.green}>
                   <circle cx="150" cy="96" r="4" />
                   <circle cx="196.8" cy="123" r="4" />
                   <circle cx="196.8" cy="177" r="4" />
@@ -92,35 +92,35 @@ export default function Research() {
                   <circle cx="103.2" cy="177" r="4" />
                   <circle cx="103.2" cy="123" r="4" />
                 </g>
-                <g fill="#2563EB">
+                <g fill={C.blue}>
                   <circle cx="150" cy="46" r="5" />
                   <circle cx="240" cy="98" r="3.4" />
                 </g>
-                <g fill="#34D399">
+                <g fill={C.green2}>
                   <circle cx="240" cy="202" r="4.2" />
                   <circle cx="60" cy="98" r="4.2" />
                   <circle cx="60" cy="202" r="3.4" />
                 </g>
-                <g stroke="#34D399" opacity="0.4" data-amb="1" style={{ animation: 'nodePulse 6s ease-in-out infinite' }}>
+                <g stroke={C.green2} opacity="0.4" data-amb="1" style={{ animation: 'nodePulse 6s ease-in-out infinite' }}>
                   <circle cx="150" cy="46" r="10" />
                   <circle cx="240" cy="202" r="9" />
                   <circle cx="60" cy="98" r="9" />
                 </g>
               </g>
-              <circle cx="150" cy="150" r="7" fill="#FFFFFF" />
+              <circle cx="150" cy="150" r="7" fill={C.surface} />
               <circle
                 cx="150"
                 cy="150"
                 r="14"
-                stroke="#FFFFFF"
+                stroke={C.surface}
                 opacity="0.35"
                 data-amb="1"
                 style={{ animation: 'nodePulse 3.5s ease-in-out infinite' }}
               />
               <g data-amb="1" style={{ transformOrigin: '150px 150px', animation: 'slowSpin 34s linear infinite reverse' }}>
-                <circle cx="150" cy="16" r="2.6" fill="#34D399" opacity="0.9" />
-                <circle cx="284" cy="150" r="2" fill="#2563EB" opacity="0.6" />
-                <circle cx="150" cy="284" r="2.2" fill="#34D399" opacity="0.6" />
+                <circle cx="150" cy="16" r="2.6" fill={C.green2} opacity="0.9" />
+                <circle cx="284" cy="150" r="2" fill={C.blue} opacity="0.6" />
+                <circle cx="150" cy="284" r="2.2" fill={C.green2} opacity="0.6" />
               </g>
             </svg>
           </div>
@@ -139,7 +139,7 @@ export default function Research() {
                 textWrap: 'balance'
               }}
             >
-              Microbial Systems Optimization
+              {RESEARCH.title}
             </h2>
             <p
               style={{
@@ -151,8 +151,7 @@ export default function Research() {
                 textWrap: 'pretty'
               }}
             >
-              Application of molecular tools and optimization strategies for microbial systems, with emphasis on genetic
-              manipulation and strain development.
+              {RESEARCH.summary}
             </p>
             <div
               style={{
@@ -164,7 +163,7 @@ export default function Research() {
                 gap: 8
               }}
             >
-              {TAGS.map(t => (
+              {RESEARCH.tags.map(t => (
                 <span key={t} style={chip}>
                   {t}
                 </span>

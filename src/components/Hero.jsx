@@ -178,8 +178,8 @@ export default function Hero({ portraitOn }) {
             >
               <defs>
                 <linearGradient id="mmNet" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stopColor="#10B981" />
-                  <stop offset="1" stopColor="#2563EB" />
+                  <stop offset="0" stopColor={C.green} />
+                  <stop offset="1" stopColor={C.blue} />
                 </linearGradient>
               </defs>
               <g
@@ -196,14 +196,14 @@ export default function Hero({ portraitOn }) {
                 <path d="M74 186 L58 300 L156 342 L246 262" />
                 <path d="M336 224 L360 322 L262 356 L156 342" />
               </g>
-              <g stroke="#10B981" strokeWidth="1" opacity="0.35" data-amb="1" style={{ animation: 'nodePulse 8s ease-in-out infinite' }}>
+              <g stroke={C.green} strokeWidth="1" opacity="0.35" data-amb="1" style={{ animation: 'nodePulse 8s ease-in-out infinite' }}>
                 <circle cx="46" cy="92" r="7.5" />
                 <circle cx="206" cy="96" r="8" />
                 <circle cx="152" cy="214" r="8" />
                 <circle cx="336" cy="224" r="7" />
                 <circle cx="156" cy="342" r="6.5" />
               </g>
-              <g fill="#10B981" data-amb="1" style={{ animation: 'nodePulse 5.5s ease-in-out infinite' }}>
+              <g fill={C.green} data-amb="1" style={{ animation: 'nodePulse 5.5s ease-in-out infinite' }}>
                 <circle cx="46" cy="92" r="3.4" />
                 <circle cx="128" cy="54" r="2.4" />
                 <circle cx="206" cy="96" r="3.4" />
@@ -218,17 +218,17 @@ export default function Hero({ portraitOn }) {
                 <circle cx="360" cy="322" r="2.4" />
                 <circle cx="262" cy="356" r="2.8" />
               </g>
-              <circle cx="200" cy="200" r="152" stroke="#E5EBE8" strokeWidth="1" strokeDasharray="2 7" />
-              <circle cx="200" cy="200" r="188" stroke="#E5EBE8" strokeWidth="1" />
+              <circle cx="200" cy="200" r="152" stroke={C.line} strokeWidth="1" strokeDasharray="2 7" />
+              <circle cx="200" cy="200" r="188" stroke={C.line} strokeWidth="1" />
               <g data-amb="1" style={{ transformOrigin: '200px 200px', animation: 'slowSpin 44s linear infinite' }}>
-                <circle cx="200" cy="12" r="3" fill="#2563EB" opacity="0.55" />
-                <circle cx="388" cy="200" r="2.6" fill="#10B981" opacity="0.8" />
-                <circle cx="200" cy="388" r="2.2" fill="#10B981" opacity="0.55" />
-                <circle cx="48" cy="200" r="2" fill="#0B3D2E" opacity="0.4" />
+                <circle cx="200" cy="12" r="3" fill={C.blue} opacity="0.55" />
+                <circle cx="388" cy="200" r="2.6" fill={C.green} opacity="0.8" />
+                <circle cx="200" cy="388" r="2.2" fill={C.green} opacity="0.55" />
+                <circle cx="48" cy="200" r="2" fill={C.deep} opacity="0.4" />
               </g>
               <g data-amb="1" style={{ transformOrigin: '200px 200px', animation: 'slowSpin 30s linear infinite reverse' }}>
-                <circle cx="200" cy="48" r="2.4" fill="#10B981" opacity="0.7" />
-                <circle cx="352" cy="200" r="1.8" fill="#2563EB" opacity="0.45" />
+                <circle cx="200" cy="48" r="2.4" fill={C.green} opacity="0.7" />
+                <circle cx="352" cy="200" r="1.8" fill={C.blue} opacity="0.45" />
               </g>
             </svg>
 
@@ -244,7 +244,7 @@ export default function Hero({ portraitOn }) {
                   viewBox="0 0 80 320"
                   style={{ width: '100%', height: '100%' }}
                   fill="none"
-                  stroke="#0B3D2E"
+                  stroke={C.deep}
                   strokeWidth="1.1"
                   strokeLinecap="round"
                   aria-hidden="true"
@@ -255,23 +255,23 @@ export default function Hero({ portraitOn }) {
                   />
                   <path
                     d="M40 0 C8 26 8 54 40 80 C72 106 72 134 40 160 C8 186 8 214 40 240 C72 266 72 294 40 320"
-                    stroke="#10B981"
+                    stroke={C.green}
                     opacity="0.85"
                   />
-                  <g stroke="#10B981" strokeWidth="0.9" opacity="0.5">
+                  <g stroke={C.green} strokeWidth="0.9" opacity="0.5">
                     <path d="M31 10h18M19 30h42M19 50h42M31 70h18" />
                     <path d="M31 90h18M19 110h42M19 130h42M31 150h18" />
                     <path d="M31 170h18M19 190h42M19 210h42M31 230h18" />
                     <path d="M31 250h18M19 270h42M19 290h42M31 310h18" />
                   </g>
-                  <g fill="#10B981" stroke="none" opacity="0.9">
+                  <g fill={C.green} stroke="none" opacity="0.9">
                     <circle cx="40" cy="0" r="2.2" />
                     <circle cx="40" cy="80" r="2.2" />
                     <circle cx="40" cy="160" r="2.2" />
                     <circle cx="40" cy="240" r="2.2" />
                     <circle cx="40" cy="320" r="2.2" />
                   </g>
-                  <g fill="#0B3D2E" stroke="none" opacity="0.55">
+                  <g fill={C.deep} stroke="none" opacity="0.55">
                     <circle cx="61" cy="40" r="1.7" />
                     <circle cx="19" cy="120" r="1.7" />
                     <circle cx="61" cy="200" r="1.7" />
@@ -286,20 +286,20 @@ export default function Hero({ portraitOn }) {
                 viewBox="0 0 100 132"
                 style={{ width: '100%', height: 'auto' }}
                 fill="none"
-                stroke="#0B3D2E"
+                stroke={C.deep}
                 strokeWidth="1.1"
                 strokeLinecap="round"
                 opacity="0.6"
                 aria-hidden="true"
               >
                 <path d="M14 22h72M22 22v78a24 24 0 0 0 24 24h8a24 24 0 0 0 24-24V22" />
-                <path d="M50 10v72" stroke="#10B981" />
-                <path d="M26 58h48" stroke="#10B981" opacity="0.4" strokeDasharray="3 4" />
+                <path d="M50 10v72" stroke={C.green} />
+                <path d="M26 58h48" stroke={C.green} opacity="0.4" strokeDasharray="3 4" />
                 <g data-amb="1" style={{ transformOrigin: '50px 87px', animation: 'stir 2.4s ease-in-out infinite' }}>
-                  <path d="M36 82h28M40 92h20" stroke="#10B981" />
+                  <path d="M36 82h28M40 92h20" stroke={C.green} />
                 </g>
                 <path d="M8 40h6M8 62h6M86 52h6" />
-                <g data-amb="1" fill="#10B981" stroke="none" opacity="0.75">
+                <g data-amb="1" fill={C.green} stroke="none" opacity="0.75">
                   <circle cx="38" cy="104" r="2.6" style={{ animation: 'bubble 3.6s ease-in infinite' }} />
                   <circle cx="52" cy="108" r="2" style={{ animation: 'bubble 4.4s ease-in infinite', animationDelay: '.9s' }} />
                   <circle cx="64" cy="102" r="2.4" style={{ animation: 'bubble 4s ease-in infinite', animationDelay: '1.8s' }} />
@@ -387,7 +387,7 @@ export default function Hero({ portraitOn }) {
           height="14"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="#10B981"
+          stroke={C.green}
           strokeWidth="1.6"
           strokeLinecap="round"
           aria-hidden="true"

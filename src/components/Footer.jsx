@@ -52,7 +52,7 @@ export default function Footer() {
           preserveAspectRatio="none"
           style={{ width: '100%', height: 24, opacity: 0.5 }}
           fill="none"
-          stroke="#10B981"
+          stroke={C.green}
           strokeWidth="1"
           aria-hidden="true"
         >

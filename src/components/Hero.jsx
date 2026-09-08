@@ -81,7 +81,7 @@ export default function Hero({ portraitOn }) {
         <div style={{ flex: '1.35 1 400px', minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 22 }}>
             <span aria-hidden="true" style={{ width: 26, height: 1, background: C.green }} />
-            <span style={mono(11, { color: C.green })}>
+            <span style={mono(11, { color: C.greenInk })}>
               Bioprocess Engineer — Microbial Biotechnology
             </span>
           </div>
@@ -99,10 +99,10 @@ export default function Hero({ portraitOn }) {
             }}
           >
             <span style={word('.04s')}>Engineering</span>{' '}
-            <span style={{ ...word('.16s'), color: C.green }}>Biology.</span>
+            <span style={{ ...word('.16s'), color: C.greenInk }}>Biology.</span>
             <br />
             <span style={word('.28s')}>Optimizing</span>{' '}
-            <span style={{ ...word('.4s'), color: C.green }}>Bioprocesses.</span>
+            <span style={{ ...word('.4s'), color: C.greenInk }}>Bioprocesses.</span>
           </h1>
 
           <p

@@ -31,7 +31,7 @@ export default function Objective() {
       ></div>
 
       <div style={{ position: 'relative', width: '100%', maxWidth: 820, margin: '0 auto', textAlign: 'center' }}>
-        <SectionHead num="10" label="Objective" align="center" marginBottom={0} />
+        <SectionHead num="10" label="Objective" align="center" marginBottom={0} onDark />
         <h2
           data-reveal="0"
           style={{

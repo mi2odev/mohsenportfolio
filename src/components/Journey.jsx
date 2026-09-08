@@ -108,7 +108,7 @@ export default function Journey() {
                     </svg>
                     <Icon size={24} stroke={on ? C.deep : C.muted} />
                   </span>
-                  <span aria-hidden="true" style={mono(9.5, { letterSpacing: '0.1em', color: C.green })}>
+                  <span aria-hidden="true" style={mono(9.5, { letterSpacing: '0.1em', color: C.greenInk })}>
                     {pad(i + 1)}
                   </span>
                   <span style={{ fontSize: 12.5, fontWeight: 600, lineHeight: 1.4, color: C.ink }}>
@@ -158,7 +158,7 @@ export default function Journey() {
             minHeight: 112
           }}
         >
-          <div style={mono(10, { letterSpacing: '0.14em', color: C.green })}>
+          <div style={mono(10, { letterSpacing: '0.14em', color: C.greenInk })}>
             {pad(active + 1)} — {stage.label}
           </div>
           <p

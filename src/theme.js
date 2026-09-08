@@ -11,7 +11,21 @@ export const C = {
   surface: '#FFFFFF',
   ink: '#1A2421',
   deep: '#0B3D2E',
+  /**
+   * The brand green, for GRAPHICS only — borders, dots, rules, SVG artwork.
+   * On white it measures 2.5:1, so it must never carry text on a light ground
+   * and must never sit behind white text. Use `greenInk` there instead.
+   */
   green: '#10B981',
+  /**
+   * The same green darkened until it clears WCAG AA as small text: 5.5:1 on
+   * white, 5.3:1 on the off-white sections. Use it for green text on a light
+   * background and for solid green fills behind white text.
+   *
+   * On the deep-green bands it is the wrong way round — there `green` reads at
+   * 4.8:1 and `greenInk` would drop to 2.2:1 — so dark sections keep `green`.
+   */
+  greenInk: '#047857',
   green2: '#34D399',
   muted: '#5B6B64',
   line: '#E5EBE8',
@@ -19,9 +33,9 @@ export const C = {
 };
 
 export const F = {
-  display: "'Manrope',sans-serif",
-  body: "'Inter',ui-sans-serif,system-ui,sans-serif",
-  mono: "'JetBrains Mono',ui-monospace,monospace"
+  display: "'Manrope Variable','Manrope',sans-serif",
+  body: "'Inter Variable','Inter',ui-sans-serif,system-ui,sans-serif",
+  mono: "'JetBrains Mono Variable','JetBrains Mono',ui-monospace,monospace"
 };
 
 export const SHADOW = '0 8px 30px rgba(11,61,46,.06)';

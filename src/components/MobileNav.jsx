@@ -113,7 +113,7 @@ export default function MobileNav({ id, navLinks, onClose }) {
           >
             <span
               aria-hidden="true"
-              style={{ fontFamily: F.mono, fontSize: 10, letterSpacing: '0.12em', color: C.green }}
+              style={{ fontFamily: F.mono, fontSize: 10, letterSpacing: '0.12em', color: C.greenInk }}
             >
               {l.num}
             </span>

@@ -19,7 +19,7 @@ const FACTS = [
   ['Role', 'Bioprocess Engineer', C.ink],
   ['Field', 'Microbial Biotechnology', C.ink],
   ['Based', 'Constantine, Algeria', C.ink],
-  ['Status', 'Open to opportunities', C.green]
+  ['Status', 'Open to opportunities', C.greenInk]
 ];
 
 export default function About({ stats, statsRef }) {
@@ -121,7 +121,7 @@ export default function About({ stats, statsRef }) {
                   borderBottom: '1px solid ' + C.line
                 }}
               >
-                <span style={mono(11, { color: C.green })}>Profile.ID — M.Meradji</span>
+                <span style={mono(11, { color: C.greenInk })}>Profile.ID — M.Meradji</span>
                 <span
                   aria-hidden="true"
                   style={{ width: 6, height: 6, borderRadius: '50%', background: C.green }}

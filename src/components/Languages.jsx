@@ -84,7 +84,7 @@ export default function Languages() {
                 </span>
 
                 <div style={{ minWidth: 0 }}>
-                  <div aria-hidden="true" style={mono(9.5, { letterSpacing: '0.14em', color: C.green })}>
+                  <div aria-hidden="true" style={mono(9.5, { letterSpacing: '0.14em', color: C.greenInk })}>
                     LNG.{pad(i + 1)}
                   </div>
                   <div

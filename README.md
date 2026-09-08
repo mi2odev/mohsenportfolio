@@ -31,8 +31,9 @@ npm run preview   # serve the built files locally
 index.html                 Meta tags, JSON-LD, Google Fonts, #root mount
 public/                    Copied to dist/ as-is: favicons, manifest, robots, share card
 src/
-  main.jsx                 React entry; passes the three display flags to <App>
+  main.jsx                 React entry; fonts, error boundary, display flags
   App.jsx                  Page shell: skip link, scroll bar, header, all sections
+  fonts.css                @font-face for the three self-hosted variable fonts
   index.css                Tokens (CSS variables), resets, focus styles, print
                            rules, keyframes
   theme.js                 Colors, font stacks, shared style objects and helpers
@@ -59,6 +60,7 @@ src/
     Footer.jsx             Wave, credits, back to top
     Icons.jsx              All line icons
     SectionHead.jsx        "SEC.0X / Label" heading rule
+    ErrorBoundary.jsx      Contact-details fallback if the page fails to render
 ```
 
 ## Editing content
@@ -86,6 +88,17 @@ Colors and font stacks live in `src/theme.js`. The same colors are mirrored as C
 custom properties at the top of `src/index.css` for the rules written in plain CSS —
 change a colour in one place and change it in the other.
 
+### The two greens
+
+`C.green` (`#10B981`) is the brand green, and it measures 2.5:1 on white — fine for a
+border or a dot, unreadable as text. `C.greenInk` (`#047857`) is the same green
+darkened until it clears WCAG AA at 5.5:1, and it is what every piece of green text on
+a light background uses, along with any solid green fill sitting behind white text.
+
+The deep-green bands invert this: there `green` reads at 4.8:1 and `greenInk` drops to
+2.2:1, so those sections keep `green` — which is what `SectionHead`'s `onDark` prop is
+for. When adding green text, pick by what is behind it.
+
 ## Display flags
 
 `src/main.jsx` renders:
@@ -111,6 +124,8 @@ change a colour in one place and change it in the other.
   reveal-on-scroll effect and the stat count-up all turn off.
 - Native language names carry `lang` and `dir`, so a screen reader pronounces
   العربية and Français correctly instead of reading them as English.
+- Every piece of text on the page clears WCAG AA contrast (4.5:1, or 3:1 for
+  large headings), verified against the rendered page rather than by eye.
 
 ## Printing
 
@@ -144,6 +159,21 @@ Once the site has a real domain, change the two `og:image` / `twitter:image` tag
 `index.html` to absolute URLs (`https://your-domain/og-image.jpg`) and add a
 `<link rel="canonical">` — some crawlers will not resolve a relative image path.
 
-## Notes
+## Fonts
 
-- Fonts (Manrope, Inter, JetBrains Mono) load from Google Fonts in `index.html`.
+Manrope, Inter and JetBrains Mono are self-hosted, not loaded from Google Fonts. The
+`@fontsource-variable` packages supply the files and `src/fonts.css` declares the three
+faces; one variable file per family covers every weight the design uses.
+
+That means no render-blocking stylesheet on a third-party origin, no extra DNS and TLS
+round trip before text can paint, no flash of fallback type, and no request to Google
+from an EU visitor's browser.
+
+Only the latin subset is declared. If you add copy in another script, add the matching
+`@font-face` block from `node_modules/@fontsource-variable/<family>/wght.css`.
+
+## Continuous integration
+
+`.github/workflows/build.yml` runs `npm ci && npm run build` on every push to `main`
+and on pull requests, and uploads `dist/` as an artifact. Since the site is pushed
+straight to `main`, this is what catches a build that would otherwise deploy broken.

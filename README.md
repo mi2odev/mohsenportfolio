@@ -114,6 +114,14 @@ Colors and font stacks live in `src/theme.js`. The same colors are mirrored as C
 custom properties at the top of `src/index.css` for the rules written in plain CSS —
 change a colour in one place and change it in the other.
 
+### One column
+
+Every left-aligned section shares the 1180 px column from `wrap()`, so the section
+rule and heading start at the same x down the whole page. Objective and Contact are
+centred on purpose — they are the two breaks in that rhythm. If you add a section,
+use `wrap()` and let the content inside it be as narrow as it needs to be, rather than
+narrowing the column and centring it.
+
 ### The two greens
 
 `C.green` (`#10B981`) is the brand green, and it measures 2.5:1 on white — fine for a
@@ -152,6 +160,8 @@ for. When adding green text, pick by what is behind it.
   العربية and Français correctly instead of reading them as English.
 - Every piece of text on the page clears WCAG AA contrast (4.5:1, or 3:1 for
   large headings), verified against the rendered page rather than by eye.
+- Every link and button is at least 44 px on its short side, the size a finger
+  can reliably hit. The contact email and phone were 17 px tall lines before.
 
 ## Printing
 

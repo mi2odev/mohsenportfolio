@@ -122,6 +122,10 @@ export default function Contact() {
               <a
                 href={'mailto:' + EMAIL}
                 style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  minHeight: 44,
+                  padding: '4px 2px',
                   fontSize: 'clamp(14px,1.8vw,17px)',
                   fontWeight: 600,
                   color: C.deep,
@@ -136,8 +140,8 @@ export default function Contact() {
                 aria-label="Copy email address"
                 className="icon-btn"
                 style={{
-                  width: 34,
-                  height: 34,
+                  width: 44,
+                  height: 44,
                   flex: '0 0 auto',
                   display: 'flex',
                   alignItems: 'center',
@@ -162,7 +166,15 @@ export default function Contact() {
             </div>
             <a
               href={PHONE_HREF}
-              style={{ fontSize: 'clamp(14px,1.6vw,16px)', fontWeight: 500, color: C.muted }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minHeight: 44,
+                fontSize: 'clamp(14px,1.6vw,16px)',
+                fontWeight: 500,
+                color: C.muted
+              }}
             >
               {PHONE}
             </a>

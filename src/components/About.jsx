@@ -1,14 +1,8 @@
-import { C, F, section, wrap, h2, SHADOW } from '../theme.js';
+import { C, F, section, wrap, h2, mono, SHADOW } from '../theme.js';
 import SectionHead from './SectionHead.jsx';
-import presenting from '../assets/presenting.png';
+import presenting from '../assets/presenting.jpg';
 
-const dt = {
-  fontFamily: F.mono,
-  fontSize: 10,
-  letterSpacing: '0.12em',
-  textTransform: 'uppercase',
-  color: C.muted
-};
+const dt = mono(10, { color: C.muted });
 
 const dd = { margin: 0, fontSize: 14, fontWeight: 600, color: C.ink, textAlign: 'right' };
 
@@ -74,9 +68,12 @@ export default function About({ stats, statsRef }) {
             >
               <img
                 src={presenting}
-                alt="Mohcene Meradji presenting"
+                alt="Mohcene Meradji presenting his work"
+                width="1000"
+                height="1000"
                 loading="lazy"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '62% 30%', display: 'block' }}
+                decoding="async"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '62% 30%' }}
               />
             </div>
 
@@ -95,7 +92,15 @@ export default function About({ stats, statsRef }) {
             >
               <svg
                 viewBox="0 0 80 320"
-                style={{ position: 'absolute', right: -6, top: -24, height: '150%', width: 'auto', opacity: 0.06, pointerEvents: 'none' }}
+                style={{
+                  position: 'absolute',
+                  right: -6,
+                  top: -24,
+                  height: '150%',
+                  width: 'auto',
+                  opacity: 0.06,
+                  pointerEvents: 'none'
+                }}
                 fill="none"
                 stroke="#0B3D2E"
                 strokeWidth="2"
@@ -116,12 +121,11 @@ export default function About({ stats, statsRef }) {
                   borderBottom: '1px solid ' + C.line
                 }}
               >
+                <span style={mono(11, { color: C.green })}>Profile.ID — M.Meradji</span>
                 <span
-                  style={{ fontFamily: F.mono, fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: C.green }}
-                >
-                  Profile.ID — M.Meradji
-                </span>
-                <span style={{ width: 6, height: 6, borderRadius: '50%', background: C.green }}></span>
+                  aria-hidden="true"
+                  style={{ width: 6, height: 6, borderRadius: '50%', background: C.green }}
+                />
               </div>
 
               <dl style={{ position: 'relative', margin: 0, padding: '14px 0 0', display: 'grid', gap: 11 }}>
@@ -164,17 +168,7 @@ export default function About({ stats, statsRef }) {
               >
                 {s.shown}
               </div>
-              <div
-                style={{
-                  marginTop: 12,
-                  fontFamily: F.mono,
-                  fontSize: 10,
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  color: C.muted,
-                  lineHeight: 1.6
-                }}
-              >
+              <div style={{ marginTop: 12, ...mono(10, { color: C.muted, lineHeight: 1.6 }) }}>
                 {s.label}
               </div>
             </div>

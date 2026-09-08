@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { C, F, section, wrap, h2, pad } from '../theme.js';
+import { C, F, section, wrap, h2, pad, mono } from '../theme.js';
 import SectionHead from './SectionHead.jsx';
 import { CERTS } from '../data.js';
 import { ChevronDown } from './Icons.jsx';
@@ -18,6 +18,8 @@ export default function Certifications() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           {CERTS.map(([title, org, year], i) => {
             const isOpen = open === i;
+            const panelId = 'cert-panel-' + i;
+            const buttonId = 'cert-button-' + i;
             return (
               <div
                 key={title}
@@ -31,7 +33,11 @@ export default function Certifications() {
                 }}
               >
                 <button
+                  id={buttonId}
+                  type="button"
                   onClick={() => setOpen(isOpen ? -1 : i)}
+                  aria-expanded={isOpen}
+                  aria-controls={panelId}
                   style={{
                     width: '100%',
                     display: 'flex',
@@ -45,7 +51,7 @@ export default function Certifications() {
                     minHeight: 56
                   }}
                 >
-                  <span style={{ flex: '0 0 auto', fontFamily: F.mono, fontSize: 10, letterSpacing: '0.12em', color: C.green }}>
+                  <span aria-hidden="true" style={{ flex: '0 0 auto', ...mono(10, { color: C.green }) }}>
                     {pad(i + 1)}
                   </span>
                   <span
@@ -61,12 +67,11 @@ export default function Certifications() {
                   >
                     {title}
                   </span>
-                  <span
-                    style={{ flex: '0 0 auto', fontFamily: F.mono, fontSize: 10, letterSpacing: '0.1em', color: C.muted }}
-                  >
+                  <span style={{ flex: '0 0 auto', ...mono(10, { letterSpacing: '0.1em', color: C.muted }) }}>
                     {year}
                   </span>
                   <span
+                    aria-hidden="true"
                     style={{
                       flex: '0 0 auto',
                       width: 26,
@@ -85,32 +90,25 @@ export default function Certifications() {
                   </span>
                 </button>
 
-                {isOpen && (
-                  <div
-                    style={{
-                      padding: '16px clamp(16px,2.4vw,22px) clamp(18px,2.4vw,24px)',
-                      margin: '0 clamp(16px,2.4vw,22px)',
-                      display: 'flex',
-                      flexWrap: 'wrap',
-                      gap: '10px 22px',
-                      alignItems: 'center',
-                      borderTop: '1px solid ' + C.line
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: F.mono,
-                        fontSize: 10,
-                        letterSpacing: '0.12em',
-                        textTransform: 'uppercase',
-                        color: C.muted
-                      }}
-                    >
-                      Institution
-                    </span>
-                    <span style={{ fontSize: 14, fontWeight: 500, color: C.ink }}>{org}</span>
-                  </div>
-                )}
+                <div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={buttonId}
+                  hidden={!isOpen}
+                  className="panel-in"
+                  style={{
+                    padding: '16px clamp(16px,2.4vw,22px) clamp(18px,2.4vw,24px)',
+                    margin: '0 clamp(16px,2.4vw,22px)',
+                    display: isOpen ? 'flex' : 'none',
+                    flexWrap: 'wrap',
+                    gap: '10px 22px',
+                    alignItems: 'center',
+                    borderTop: '1px solid ' + C.line
+                  }}
+                >
+                  <span style={mono(10, { color: C.muted })}>Institution</span>
+                  <span style={{ fontSize: 14, fontWeight: 500, color: C.ink }}>{org}</span>
+                </div>
               </div>
             );
           })}

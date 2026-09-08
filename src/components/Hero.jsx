@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import { C, F, pill } from '../theme.js';
+import { C, F, pill, mono, sectionBase } from '../theme.js';
 import { ArrowDown, DownloadIcon } from './Icons.jsx';
-import portrait from '../assets/portrait.png';
+import portrait from '../assets/portrait.jpg';
 import cv from '../assets/Mohcene_Meradji_CV.pdf';
 
 const word = delay => ({
@@ -10,13 +10,7 @@ const word = delay => ({
   animationDelay: delay
 });
 
-const meta = {
-  fontFamily: F.mono,
-  fontSize: 11,
-  letterSpacing: '0.12em',
-  textTransform: 'uppercase',
-  color: C.muted
-};
+const meta = mono(11, { color: C.muted });
 
 export default function Hero({ portraitOn }) {
   const particles = useMemo(
@@ -40,13 +34,13 @@ export default function Hero({ portraitOn }) {
     <section
       id="home"
       style={{
-        position: 'relative',
+        ...sectionBase,
         overflow: 'hidden',
-        scrollMarginTop: 84,
         padding: 'clamp(48px,7vw,92px) clamp(20px,5vw,40px) clamp(56px,7vw,96px)'
       }}
     >
       <div
+        aria-hidden="true"
         style={{
           position: 'absolute',
           top: '-18%',
@@ -59,6 +53,7 @@ export default function Hero({ portraitOn }) {
         }}
       ></div>
       <div
+        aria-hidden="true"
         style={{
           position: 'absolute',
           inset: 0,
@@ -85,16 +80,8 @@ export default function Hero({ portraitOn }) {
       >
         <div style={{ flex: '1.35 1 400px', minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 22 }}>
-            <span style={{ width: 26, height: 1, background: C.green }}></span>
-            <span
-              style={{
-                fontFamily: F.mono,
-                fontSize: 11,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                color: C.green
-              }}
-            >
+            <span aria-hidden="true" style={{ width: 26, height: 1, background: C.green }} />
+            <span style={mono(11, { color: C.green })}>
               Bioprocess Engineer — Microbial Biotechnology
             </span>
           </div>
@@ -128,7 +115,6 @@ export default function Hero({ portraitOn }) {
               textWrap: 'pretty',
               ...word('.52s'),
               display: 'block'
-
             }}
           >
             Bioprocess Engineer specializing in Microbial Biotechnology, Bioprocess Optimization, Upstream &amp;
@@ -344,6 +330,10 @@ export default function Hero({ portraitOn }) {
                 <img
                   src={portrait}
                   alt="Mohcene Meradji in the laboratory"
+                  width="640"
+                  height="640"
+                  decoding="async"
+                  fetchpriority="high"
                   style={{
                     width: '100%',
                     height: '100%',
@@ -360,6 +350,7 @@ export default function Hero({ portraitOn }) {
               <span
                 key={i}
                 data-amb="1"
+                aria-hidden="true"
                 style={{
                   position: 'absolute',
                   left: p.l,
@@ -389,17 +380,7 @@ export default function Hero({ portraitOn }) {
           gap: 8
         }}
       >
-        <span
-          style={{
-            fontFamily: F.mono,
-            fontSize: 10,
-            letterSpacing: '0.18em',
-            textTransform: 'uppercase',
-            color: C.muted
-          }}
-        >
-          Scroll
-        </span>
+        <span style={mono(10, { letterSpacing: '0.18em', color: C.muted })}>Scroll</span>
         <svg
           data-amb="1"
           width="14"
@@ -409,6 +390,7 @@ export default function Hero({ portraitOn }) {
           stroke="#10B981"
           strokeWidth="1.6"
           strokeLinecap="round"
+          aria-hidden="true"
           style={{ animation: 'chev 2.2s ease-in-out infinite' }}
         >
           <path d="M6 9l6 6 6-6" />

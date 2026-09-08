@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { C, F } from '../theme.js';
+import { C, mono } from '../theme.js';
 import logo from '../assets/logo.png';
 
 export default function Footer() {
@@ -29,6 +29,7 @@ export default function Footer() {
         <span
           key={i}
           data-amb="1"
+          aria-hidden="true"
           style={{
             position: 'absolute',
             left: p.l,
@@ -49,7 +50,7 @@ export default function Footer() {
         <svg
           viewBox="0 0 1200 24"
           preserveAspectRatio="none"
-          style={{ width: '100%', height: 24, display: 'block', opacity: 0.5 }}
+          style={{ width: '100%', height: 24, opacity: 0.5 }}
           fill="none"
           stroke="#10B981"
           strokeWidth="1"
@@ -76,31 +77,16 @@ export default function Footer() {
             <img
               src={logo}
               alt=""
-              style={{ height: 34, width: 'auto', display: 'block', filter: 'drop-shadow(0 0 10px rgba(16,185,129,.25))' }}
+              width="51"
+              height="34"
+              loading="lazy"
+              style={{ height: 34, width: 'auto', filter: 'drop-shadow(0 0 10px rgba(16,185,129,.25))' }}
             />
-            <span
-              style={{
-                fontFamily: F.mono,
-                fontSize: 10,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                color: 'rgba(255,255,255,.55)',
-                lineHeight: 1.7
-              }}
-            >
-              © 2026 Mohcene Meradji — Bioprocess Engineer · Constantine, DZ
+            <span style={mono(10, { color: 'rgba(255,255,255,.55)', lineHeight: 1.7 })}>
+              © {new Date().getFullYear()} Mohcene Meradji — Bioprocess Engineer · Constantine, DZ
             </span>
           </div>
-          <a
-            href="#home"
-            style={{
-              fontFamily: F.mono,
-              fontSize: 10,
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: C.green
-            }}
-          >
+          <a href="#home" style={mono(10, { color: C.green })}>
             Back to top ↑
           </a>
         </div>

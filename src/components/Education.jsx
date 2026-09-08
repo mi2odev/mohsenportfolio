@@ -1,4 +1,4 @@
-import { C, F, section, wrap, h2, chip, SHADOW } from '../theme.js';
+import { C, F, section, wrap, h2, chip, mono, SHADOW } from '../theme.js';
 import SectionHead from './SectionHead.jsx';
 import { EDUCATION } from '../data.js';
 
@@ -13,15 +13,16 @@ export default function Education() {
 
         <div style={{ position: 'relative', paddingLeft: 'clamp(28px,4vw,44px)' }}>
           <span
+            aria-hidden="true"
             style={{
               position: 'absolute',
               left: 5,
               top: 8,
               bottom: 8,
               width: 1,
-              background: 'linear-gradient(180deg,#10B981,rgba(16,185,129,.15))'
+              background: 'linear-gradient(180deg,' + C.green + ',rgba(16,185,129,.15))'
             }}
-          ></span>
+          />
 
           {EDUCATION.map((e, i) => (
             <div
@@ -31,6 +32,7 @@ export default function Education() {
             >
               <span
                 data-amb="1"
+                aria-hidden="true"
                 style={{
                   position: 'absolute',
                   left: 'calc(-1 * clamp(28px,4vw,44px))',
@@ -43,7 +45,7 @@ export default function Education() {
                   animation: 'dotPulse 2.8s ease-out infinite',
                   animationDelay: i === 0 ? '0s' : '.8s'
                 }}
-              ></span>
+              />
 
               <div
                 className="hover-border"
@@ -55,28 +57,14 @@ export default function Education() {
                 }}
               >
                 <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 10, marginBottom: 14 }}>
-                  <span
-                    style={{
-                      fontFamily: F.mono,
-                      fontSize: 10,
-                      letterSpacing: '0.12em',
-                      textTransform: 'uppercase',
-                      color: C.muted
-                    }}
-                  >
-                    {e.period}
-                  </span>
+                  <span style={mono(10, { color: C.muted })}>{e.period}</span>
                   {e.badge && (
                     <span
                       style={{
                         padding: '5px 11px',
                         borderRadius: 999,
                         background: 'rgba(16,185,129,.1)',
-                        color: C.deep,
-                        fontFamily: F.mono,
-                        fontSize: 10,
-                        letterSpacing: '0.1em',
-                        textTransform: 'uppercase'
+                        ...mono(10, { letterSpacing: '0.1em', color: C.deep })
                       }}
                     >
                       {e.badge}

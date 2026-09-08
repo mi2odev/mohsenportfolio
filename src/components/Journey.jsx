@@ -1,27 +1,18 @@
 import { useState } from 'react';
-import { C, F, section, wrap, h2, pad } from '../theme.js';
+import { C, section, wrap, h2, pad, mono, glow } from '../theme.js';
 import SectionHead from './SectionHead.jsx';
 import { STAGES } from '../data.js';
 import { ICONS } from './Icons.jsx';
 
+const PANEL_ID = 'journey-detail';
+
 export default function Journey() {
-  const [stage, setStage] = useState(2);
-  const active = Math.max(0, Math.min(STAGES.length - 1, stage));
+  const [active, setActive] = useState(2);
+  const [, activeLabel, activeText] = STAGES[active];
 
   return (
     <section id="journey" style={{ ...section, overflow: 'hidden' }}>
-      <div
-        style={{
-          position: 'absolute',
-          top: '-10%',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: 'min(900px,110vw)',
-          height: 420,
-          background: 'radial-gradient(ellipse,rgba(16,185,129,.07) 0%,rgba(16,185,129,0) 70%)',
-          pointerEvents: 'none'
-        }}
-      ></div>
+      <div aria-hidden="true" style={glow({ width: 'min(900px,110vw)', height: 420, top: '-10%' })} />
 
       <div style={{ ...wrap(), position: 'relative' }}>
         <SectionHead num="06" label="Journey" />
@@ -38,7 +29,8 @@ export default function Journey() {
             color: C.muted
           }}
         >
-          From a single colony to a released biopharmaceutical product. Select a stage to read its definition.
+          From a single colony to a released biopharmaceutical product. Select a stage to read its
+          definition.
         </p>
 
         <div
@@ -54,13 +46,18 @@ export default function Journey() {
           {STAGES.map(([key, label], i) => {
             const Icon = ICONS[key];
             const on = i === active;
-            const pick = () => setStage(i);
+            const pick = () => setActive(i);
             return (
               <div key={label} style={{ display: 'contents' }}>
-                <div
+                <button
+                  type="button"
+                  className="stage-btn"
                   data-reveal={i * 110}
                   onClick={pick}
                   onMouseEnter={pick}
+                  onFocus={pick}
+                  aria-pressed={on}
+                  aria-controls={PANEL_ID}
                   style={{
                     flex: '0 0 auto',
                     width: 'clamp(96px,11.5vw,128px)',
@@ -68,14 +65,11 @@ export default function Journey() {
                     flexDirection: 'column',
                     alignItems: 'center',
                     gap: 12,
-                    cursor: 'pointer',
-                    background: 'transparent',
-                    border: 0,
-                    padding: 0,
                     textAlign: 'center'
                   }}
                 >
                   <span
+                    aria-hidden="true"
                     style={{
                       position: 'relative',
                       width: 'clamp(52px,6vw,64px)',
@@ -86,8 +80,11 @@ export default function Journey() {
                       borderRadius: '50%',
                       border: '1px solid ' + (on ? C.green : C.line),
                       background: on ? 'rgba(16,185,129,0.1)' : C.surface,
-                      boxShadow: on ? '0 8px 30px rgba(16,185,129,0.22)' : '0 8px 30px rgba(11,61,46,0.05)',
-                      transition: 'border-color .4s ease,background .4s ease,box-shadow .4s ease,transform .4s ease',
+                      boxShadow: on
+                        ? '0 8px 30px rgba(16,185,129,0.22)'
+                        : '0 8px 30px rgba(11,61,46,0.05)',
+                      transition:
+                        'border-color .4s ease,background .4s ease,box-shadow .4s ease,transform .4s ease',
                       transform: on ? 'scale(1.08)' : 'scale(1)'
                     }}
                   >
@@ -106,27 +103,22 @@ export default function Journey() {
                       fill="none"
                       aria-hidden="true"
                     >
-                      <circle cx="36" cy="36" r="34.5" stroke="#10B981" strokeWidth="1" strokeDasharray="3 7" />
+                      <circle cx="36" cy="36" r="34.5" stroke={C.green} strokeWidth="1" strokeDasharray="3 7" />
                     </svg>
                     <Icon size={24} stroke={on ? C.deep : C.muted} />
                   </span>
-                  <span
-                    style={{
-                      fontFamily: F.mono,
-                      fontSize: 9.5,
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                      color: C.green
-                    }}
-                  >
+                  <span aria-hidden="true" style={mono(9.5, { letterSpacing: '0.1em', color: C.green })}>
                     {pad(i + 1)}
                   </span>
-                  <span style={{ fontSize: 12.5, fontWeight: 600, lineHeight: 1.4, color: C.ink }}>{label}</span>
-                </div>
+                  <span style={{ fontSize: 12.5, fontWeight: 600, lineHeight: 1.4, color: C.ink }}>
+                    {label}
+                  </span>
+                </button>
 
                 {i < STAGES.length - 1 && (
                   <span
                     data-amb="1"
+                    aria-hidden="true"
                     style={{
                       flex: '0 0 auto',
                       alignSelf: 'flex-start',
@@ -134,13 +126,14 @@ export default function Journey() {
                       width: 'clamp(20px,2.6vw,32px)',
                       height: 2,
                       borderRadius: 2,
-                      backgroundImage: 'radial-gradient(circle at 3px 1px,#10B981 1.3px,transparent 1.7px)',
+                      backgroundImage:
+                        'radial-gradient(circle at 3px 1px,' + C.green + ' 1.3px,transparent 1.7px)',
                       backgroundSize: '6px 2px',
                       backgroundRepeat: 'repeat-x',
                       animation: 'flow 1.6s linear infinite',
                       opacity: 0.7
                     }}
-                  ></span>
+                  />
                 )}
               </div>
             );
@@ -148,7 +141,9 @@ export default function Journey() {
         </div>
 
         <div
+          id={PANEL_ID}
           data-reveal="0"
+          aria-live="polite"
           style={{
             margin: 'clamp(30px,4vw,44px) auto 0',
             maxWidth: 720,
@@ -162,10 +157,8 @@ export default function Journey() {
             minHeight: 112
           }}
         >
-          <div
-            style={{ fontFamily: F.mono, fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: C.green }}
-          >
-            {pad(active + 1)} — {STAGES[active][1]}
+          <div style={mono(10, { letterSpacing: '0.14em', color: C.green })}>
+            {pad(active + 1)} — {activeLabel}
           </div>
           <p
             style={{
@@ -176,7 +169,7 @@ export default function Journey() {
               textWrap: 'pretty'
             }}
           >
-            {STAGES[active][2]}
+            {activeText}
           </p>
         </div>
       </div>

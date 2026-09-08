@@ -1,4 +1,4 @@
-import { C, F, section, wrap, h2, SHADOW } from '../theme.js';
+import { C, F, section, wrap, h2, mono, SHADOW } from '../theme.js';
 import SectionHead from './SectionHead.jsx';
 import { EXPERIENCE } from '../data.js';
 import { ICONS } from './Icons.jsx';
@@ -46,17 +46,7 @@ export default function Experience() {
                 </div>
 
                 <div style={{ minWidth: 0 }}>
-                  <div
-                    style={{
-                      fontFamily: F.mono,
-                      fontSize: 10,
-                      letterSpacing: '0.12em',
-                      textTransform: 'uppercase',
-                      color: C.green
-                    }}
-                  >
-                    {year}
-                  </div>
+                  <div style={mono(10, { color: C.green })}>{year}</div>
                   <h3
                     style={{
                       margin: '8px 0 0',
@@ -77,11 +67,10 @@ export default function Experience() {
                       padding: '5px 11px',
                       borderRadius: 999,
                       background: tone === 'blue' ? 'rgba(37,99,235,.08)' : 'rgba(16,185,129,.1)',
-                      color: tone === 'blue' ? C.blue : C.deep,
-                      fontFamily: F.mono,
-                      fontSize: 10,
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase'
+                      ...mono(10, {
+                        letterSpacing: '0.1em',
+                        color: tone === 'blue' ? C.blue : C.deep
+                      })
                     }}
                   >
                     {kind}

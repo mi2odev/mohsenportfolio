@@ -1,4 +1,4 @@
-import { C, F, section, wrap, pad } from '../theme.js';
+import { C, F, section, wrap, pad, mono, h2 } from '../theme.js';
 import SectionHead from './SectionHead.jsx';
 import { LANGS } from '../data.js';
 
@@ -7,6 +7,9 @@ export default function Languages() {
     <section id="languages" style={{ ...section, background: C.surface }}>
       <div style={wrap(1000)}>
         <SectionHead num="09" label="Languages" />
+        <h2 data-reveal="0" style={{ ...h2, margin: '0 0 clamp(28px,3.5vw,44px)' }}>
+          Languages
+        </h2>
 
         <div style={{ display: 'grid', gap: 16, gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,240px),1fr))' }}>
           {LANGS.map(([name, native, code, glyph], i) => (
@@ -52,19 +55,19 @@ export default function Languages() {
                     fill="none"
                     aria-hidden="true"
                   >
-                    <circle cx="31" cy="31" r="27" stroke="#E5EBE8" strokeWidth="1.5" />
+                    <circle cx="31" cy="31" r="27" stroke={C.line} strokeWidth="1.5" />
                     <g data-amb="1" style={{ transformOrigin: '31px 31px', animation: 'slowSpin 22s linear infinite' }}>
                       <circle
                         cx="31"
                         cy="31"
                         r="27"
-                        stroke="#10B981"
+                        stroke={C.green}
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeDasharray="44.5 12"
                       />
                     </g>
-                    <circle cx="31" cy="31" r="21" stroke="#E5EBE8" strokeWidth="1" strokeDasharray="1.5 5" />
+                    <circle cx="31" cy="31" r="21" stroke={C.line} strokeWidth="1" strokeDasharray="1.5 5" />
                   </svg>
                   <span
                     style={{
@@ -80,15 +83,7 @@ export default function Languages() {
                 </span>
 
                 <div style={{ minWidth: 0 }}>
-                  <div
-                    style={{
-                      fontFamily: F.mono,
-                      fontSize: 9.5,
-                      letterSpacing: '0.14em',
-                      textTransform: 'uppercase',
-                      color: C.green
-                    }}
-                  >
+                  <div aria-hidden="true" style={mono(9.5, { letterSpacing: '0.14em', color: C.green })}>
                     LNG.{pad(i + 1)}
                   </div>
                   <div

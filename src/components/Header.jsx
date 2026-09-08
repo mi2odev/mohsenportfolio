@@ -1,7 +1,17 @@
-import { C, F } from '../theme.js';
+import { C, F, mono } from '../theme.js';
 import logo from '../assets/logo.png';
 
-export default function Header({ navLinks, wide, statusPill, onToggleNav }) {
+const barStyle = { width: 16, height: 1.5, background: C.deep, borderRadius: 2 };
+
+export default function Header({
+  navLinks,
+  wide,
+  statusPill,
+  navOpen,
+  navPanelId,
+  burgerRef,
+  onToggleNav
+}) {
   return (
     <header
       style={{
@@ -28,7 +38,13 @@ export default function Header({ navLinks, wide, statusPill, onToggleNav }) {
         }}
       >
         <a href="#home" style={{ display: 'flex', alignItems: 'center', gap: 10, flex: '0 0 auto' }}>
-          <img src={logo} alt="Mohcene Meradji logo" style={{ height: 38, width: 'auto', display: 'block' }} />
+          <img
+            src={logo}
+            alt="Mohcene Meradji"
+            width="57"
+            height="38"
+            style={{ height: 38, width: 'auto' }}
+          />
           <span
             style={{
               fontFamily: F.display,
@@ -44,16 +60,21 @@ export default function Header({ navLinks, wide, statusPill, onToggleNav }) {
         </a>
 
         {wide && (
-          <nav style={{ display: 'flex', alignItems: 'center', gap: 'clamp(10px,1.6vw,24px)' }}>
+          <nav
+            aria-label="Sections"
+            style={{ display: 'flex', alignItems: 'center', gap: 'clamp(10px,1.6vw,24px)' }}
+          >
             {navLinks.map(l => (
               <a
                 key={l.href}
                 href={l.href}
                 className="nav-link"
+                aria-current={l.current ? 'true' : undefined}
                 style={{ display: 'block', fontSize: 13, fontWeight: 500, padding: '4px 0' }}
               >
                 {l.label}
                 <span
+                  aria-hidden="true"
                   style={{
                     display: 'block',
                     marginTop: 5,
@@ -61,9 +82,9 @@ export default function Header({ navLinks, wide, statusPill, onToggleNav }) {
                     borderRadius: 2,
                     background: C.green,
                     transition: 'opacity .3s ease',
-                    opacity: l.on
+                    opacity: l.current ? 1 : 0
                   }}
-                ></span>
+                />
               </a>
             ))}
           </nav>
@@ -84,6 +105,7 @@ export default function Header({ navLinks, wide, statusPill, onToggleNav }) {
             >
               <span
                 data-amb="1"
+                aria-hidden="true"
                 style={{
                   width: 7,
                   height: 7,
@@ -91,17 +113,8 @@ export default function Header({ navLinks, wide, statusPill, onToggleNav }) {
                   background: C.green,
                   animation: 'dotPulse 2.4s ease-out infinite'
                 }}
-              ></span>
-              <span
-                style={{
-                  fontFamily: F.mono,
-                  fontSize: 10,
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  color: C.deep,
-                  whiteSpace: 'nowrap'
-                }}
-              >
+              />
+              <span style={mono(10, { color: C.deep, whiteSpace: 'nowrap' })}>
                 Open to opportunities
               </span>
             </div>
@@ -109,8 +122,12 @@ export default function Header({ navLinks, wide, statusPill, onToggleNav }) {
 
           {!wide && (
             <button
+              ref={burgerRef}
+              type="button"
               onClick={onToggleNav}
-              aria-label="Open menu"
+              aria-label={navOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={navOpen}
+              aria-controls={navPanelId}
               style={{
                 width: 44,
                 height: 44,
@@ -125,9 +142,9 @@ export default function Header({ navLinks, wide, statusPill, onToggleNav }) {
                 cursor: 'pointer'
               }}
             >
-              <span style={{ display: 'block', width: 16, height: 1.5, background: C.deep, borderRadius: 2 }}></span>
-              <span style={{ display: 'block', width: 16, height: 1.5, background: C.deep, borderRadius: 2 }}></span>
-              <span style={{ display: 'block', width: 16, height: 1.5, background: C.deep, borderRadius: 2 }}></span>
+              <span aria-hidden="true" style={barStyle} />
+              <span aria-hidden="true" style={barStyle} />
+              <span aria-hidden="true" style={barStyle} />
             </button>
           )}
         </div>

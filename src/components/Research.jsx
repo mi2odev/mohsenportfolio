@@ -1,4 +1,4 @@
-import { C, F, section, wrap, chip, SHADOW } from '../theme.js';
+import { C, F, section, wrap, chip, mono, SHADOW } from '../theme.js';
 import SectionHead from './SectionHead.jsx';
 
 const TAGS = ['Genetic Manipulation', 'Strain Development', 'Molecular Tools', 'Optimization'];
@@ -34,6 +34,7 @@ export default function Research() {
             }}
           >
             <div
+              aria-hidden="true"
               style={{
                 position: 'absolute',
                 inset: 0,
@@ -125,12 +126,8 @@ export default function Research() {
           </div>
 
           <div style={{ flex: '1.25 1 380px', minWidth: 0, padding: 'clamp(28px,4vw,48px)', background: C.surface }}>
-            <span
-              style={{ fontFamily: F.mono, fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: C.green }}
-            >
-              Featured Research
-            </span>
-            <h3
+            <span style={mono(11, { color: C.green })}>Featured Research</span>
+            <h2
               style={{
                 margin: '16px 0 0',
                 fontFamily: F.display,
@@ -143,7 +140,7 @@ export default function Research() {
               }}
             >
               Microbial Systems Optimization
-            </h3>
+            </h2>
             <p
               style={{
                 margin: '18px 0 0',

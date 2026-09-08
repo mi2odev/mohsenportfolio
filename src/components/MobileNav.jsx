@@ -1,9 +1,43 @@
-import { C, F } from '../theme.js';
+import { useEffect, useRef } from 'react';
+import { C, F, mono } from '../theme.js';
+import { useBodyScrollLock, useEscapeKey } from '../hooks.js';
 import { Close } from './Icons.jsx';
 
-export default function MobileNav({ navLinks, onClose }) {
+export default function MobileNav({ id, navLinks, onClose }) {
+  const panelRef = useRef(null);
+  const closeRef = useRef(null);
+
+  useBodyScrollLock(true);
+  useEscapeKey(onClose);
+
+  useEffect(() => {
+    closeRef.current?.focus();
+  }, []);
+
+  // Keep Tab inside the menu while it is open.
+  const onKeyDown = e => {
+    if (e.key !== 'Tab') return;
+    const focusable = panelRef.current?.querySelectorAll('a[href], button');
+    if (!focusable?.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  };
+
   return (
     <div
+      id={id}
+      ref={panelRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Site menu"
+      onKeyDown={onKeyDown}
       style={{
         position: 'fixed',
         inset: 0,
@@ -23,18 +57,10 @@ export default function MobileNav({ navLinks, onClose }) {
           borderBottom: '1px solid ' + C.line
         }}
       >
-        <span
-          style={{
-            fontFamily: F.mono,
-            fontSize: 10,
-            letterSpacing: '0.14em',
-            textTransform: 'uppercase',
-            color: C.muted
-          }}
-        >
-          Menu
-        </span>
+        <span style={mono(10, { letterSpacing: '0.14em', color: C.muted })}>Menu</span>
         <button
+          ref={closeRef}
+          type="button"
           onClick={onClose}
           aria-label="Close menu"
           style={{
@@ -54,6 +80,7 @@ export default function MobileNav({ navLinks, onClose }) {
       </div>
 
       <nav
+        aria-label="Sections"
         style={{
           flex: 1,
           display: 'flex',
@@ -68,6 +95,7 @@ export default function MobileNav({ navLinks, onClose }) {
             key={l.href}
             href={l.href}
             onClick={onClose}
+            aria-current={l.current ? 'true' : undefined}
             style={{
               display: 'flex',
               alignItems: 'baseline',
@@ -83,7 +111,12 @@ export default function MobileNav({ navLinks, onClose }) {
               animationDelay: l.delay
             }}
           >
-            <span style={{ fontFamily: F.mono, fontSize: 10, letterSpacing: '0.12em', color: C.green }}>{l.num}</span>
+            <span
+              aria-hidden="true"
+              style={{ fontFamily: F.mono, fontSize: 10, letterSpacing: '0.12em', color: C.green }}
+            >
+              {l.num}
+            </span>
             {l.label}
           </a>
         ))}

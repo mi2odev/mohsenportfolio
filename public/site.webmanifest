@@ -1,0 +1,14 @@
+{
+  "name": "Mohcene Meradji — Bioprocess Engineer",
+  "short_name": "M. Meradji",
+  "description": "Portfolio of Mohcene Meradji, Bioprocess Engineer.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#FAFBFA",
+  "theme_color": "#0B3D2E",
+  "icons": [
+    { "src": "favicon.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

@@ -1,19 +1,12 @@
-import { C, F, pill } from '../theme.js';
+import { C, F, pill, sectionBase } from '../theme.js';
+import SectionHead from './SectionHead.jsx';
 import { ArrowRight } from './Icons.jsx';
 
 export default function Objective() {
   return (
-    <section
-      id="objective"
-      style={{
-        position: 'relative',
-        overflow: 'hidden',
-        scrollMarginTop: 84,
-        padding: 'clamp(64px,9vw,120px) clamp(20px,5vw,40px)',
-        background: C.deep
-      }}
-    >
+    <section id="objective" style={{ ...sectionBase, overflow: 'hidden', background: C.deep }}>
       <div
+        aria-hidden="true"
         style={{
           position: 'absolute',
           inset: 0,
@@ -24,6 +17,7 @@ export default function Objective() {
         }}
       ></div>
       <div
+        aria-hidden="true"
         style={{
           position: 'absolute',
           top: '-30%',
@@ -37,19 +31,7 @@ export default function Objective() {
       ></div>
 
       <div style={{ position: 'relative', width: '100%', maxWidth: 820, margin: '0 auto', textAlign: 'center' }}>
-        <span
-          data-reveal="0"
-          style={{
-            display: 'inline-block',
-            fontFamily: F.mono,
-            fontSize: 11,
-            letterSpacing: '0.14em',
-            textTransform: 'uppercase',
-            color: C.green
-          }}
-        >
-          SEC.10 / Objective
-        </span>
+        <SectionHead num="10" label="Objective" align="center" marginBottom={0} />
         <h2
           data-reveal="0"
           style={{

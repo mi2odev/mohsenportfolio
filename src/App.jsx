@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { C, pad } from './theme.js';
 import { NAV, STATS } from './data.js';
 import { useBreakpoints, useScrollSpy, useReveal, useCountUp, useAmbientMotion } from './hooks.js';
@@ -20,11 +20,13 @@ import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
 
 const NAV_IDS = NAV.map(([, id]) => id);
-const STAT_TARGETS = STATS.map(s => s[0]);
+const STAT_TARGETS = STATS.map(([value]) => value);
+const MOBILE_NAV_ID = 'mobile-nav';
 
 export default function App({ statusOpen = true, heroPortrait = true, ambientMotion = true }) {
   const rootRef = useRef(null);
   const barRef = useRef(null);
+  const burgerRef = useRef(null);
   const [navOpen, setNavOpen] = useState(false);
 
   const { wide, xwide } = useBreakpoints();
@@ -33,27 +35,41 @@ export default function App({ statusOpen = true, heroPortrait = true, ambientMot
   useReveal(rootRef);
   useAmbientMotion(rootRef, ambientMotion);
 
+  // Widening the window past the mobile breakpoint reveals the real nav.
   useEffect(() => {
-    if (wide && navOpen) setNavOpen(false);
-  }, [wide, navOpen]);
+    if (wide) setNavOpen(false);
+  }, [wide]);
+
+  const closeNav = useCallback(() => {
+    setNavOpen(false);
+    burgerRef.current?.focus();
+  }, []);
 
   const navLinks = useMemo(
     () =>
       NAV.map(([label, id], i) => ({
         label,
         href: '#' + id,
-        on: active === id ? 1 : 0,
+        current: active === id,
         num: pad(i + 1),
         delay: 60 + i * 55 + 'ms'
       })),
     [active]
   );
 
-  const stats = STATS.map(([, suffix, label], i) => ({ label, shown: counts[i] + suffix }));
+  const stats = useMemo(
+    () => STATS.map(([, suffix, label], i) => ({ label, shown: counts[i] + suffix })),
+    [counts]
+  );
 
   return (
     <div ref={rootRef} style={{ position: 'relative', width: '100%', background: C.bg }}>
+      <a className="skip-link" href="#home">
+        Skip to content
+      </a>
+
       <div
+        aria-hidden="true"
         style={{
           position: 'fixed',
           top: 0,
@@ -69,33 +85,39 @@ export default function App({ statusOpen = true, heroPortrait = true, ambientMot
           style={{
             height: '100%',
             width: '0%',
-            background: 'linear-gradient(90deg,#0B3D2E,#10B981)',
+            background: 'linear-gradient(90deg,' + C.deep + ',' + C.green + ')',
             transition: 'width .12s linear'
           }}
-        ></div>
+        />
       </div>
 
       <Header
         navLinks={navLinks}
         wide={wide}
         statusPill={statusOpen && xwide}
+        navOpen={navOpen}
+        navPanelId={MOBILE_NAV_ID}
+        burgerRef={burgerRef}
         onToggleNav={() => setNavOpen(v => !v)}
       />
 
-      {navOpen && <MobileNav navLinks={navLinks} onClose={() => setNavOpen(false)} />}
+      {navOpen && <MobileNav id={MOBILE_NAV_ID} navLinks={navLinks} onClose={closeNav} />}
 
-      <Hero portraitOn={heroPortrait} />
-      <About stats={stats} statsRef={statsRef} />
-      <Education />
-      <Skills />
-      <Experience />
-      <Research />
-      <Journey />
-      <Certifications />
-      <Interests />
-      <Languages />
-      <Objective />
-      <Contact />
+      <main>
+        <Hero portraitOn={heroPortrait} />
+        <About stats={stats} statsRef={statsRef} />
+        <Education />
+        <Skills />
+        <Experience />
+        <Research />
+        <Journey />
+        <Certifications />
+        <Interests />
+        <Languages />
+        <Objective />
+        <Contact />
+      </main>
+
       <Footer />
     </div>
   );

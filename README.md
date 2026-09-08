@@ -1,7 +1,8 @@
 # Mohcene Meradji — Portfolio (React)
 
-A React port of the portfolio prototype. Same layout, colors, type, animations and
-interactions — rebuilt as a standard Vite + React project you can run, edit and deploy.
+A single-page portfolio for a bioprocess engineer: hero artwork, timeline, expertise
+grid, an interactive bioprocess flow, and a contact card. Built as a plain Vite + React
+project you can run, edit and deploy.
 
 ## Requirements
 
@@ -27,18 +28,20 @@ npm run preview   # serve the built files locally
 ## Structure
 
 ```
-index.html                 Google Fonts + #root mount
+index.html                 Meta tags, JSON-LD, Google Fonts, #root mount
+public/                    Copied to dist/ as-is: favicons, manifest, robots, share card
 src/
   main.jsx                 React entry; passes the three display flags to <App>
-  App.jsx                  Page shell: scroll bar, header, all sections
-  index.css                Resets, keyframes, hover/focus states
-  theme.js                 Colors, font stacks, shared style objects
+  App.jsx                  Page shell: skip link, scroll bar, header, all sections
+  index.css                Tokens (CSS variables), resets, focus styles, keyframes
+  theme.js                 Colors, font stacks, shared style objects and helpers
   data.js                  All content: nav, stats, education, skills, certs, languages…
-  hooks.js                 Breakpoints, scroll spy, reveal-on-scroll, count-up, motion toggle
+  hooks.js                 Media queries, scroll spy, reveal-on-scroll, count-up,
+                           motion toggle, scroll lock, escape key
   assets/                  Logo, photos, CV PDF
   components/
     Header.jsx             Sticky header, nav underline, status pill, burger
-    MobileNav.jsx          Full-screen menu (below 900px)
+    MobileNav.jsx          Full-screen menu dialog (below 900px)
     Hero.jsx               Headline, CTAs, DNA/network/bioreactor artwork, portrait
     About.jsx              Bio, profile card, animated stat counters
     Education.jsx          Timeline of degrees
@@ -60,7 +63,11 @@ src/
 
 Text, dates, tags and links live in `src/data.js` — change them there and every section
 updates. Long-form copy (hero headline, bio, research blurb) sits inline in its own
-component. Colors and font stacks are in `src/theme.js`.
+component.
+
+Colors and font stacks live in `src/theme.js`. The same colors are mirrored as CSS
+custom properties at the top of `src/index.css` for the rules written in plain CSS —
+change a colour in one place and change it in the other.
 
 ## Display flags
 
@@ -74,9 +81,38 @@ component. Colors and font stacks are in `src/theme.js`.
 - `heroPortrait` — show the circular portrait in the hero artwork
 - `ambientMotion` — run the decorative animations (particles, spinning rings, bubbles)
 
+## Accessibility
+
+- One `<h1>`, then `<h2>` per section and `<h3>` per card — no skipped levels.
+- A "Skip to content" link is the first thing keyboard users reach.
+- The mobile menu is a real `role="dialog"`: Escape closes it, Tab stays inside, the
+  page behind it cannot scroll, and focus returns to the burger on close.
+- The journey stage picker and the certification accordion are `<button>`s carrying
+  `aria-pressed` / `aria-expanded`, so they work with a keyboard and a screen reader.
+- Every decorative shape, particle and rule is `aria-hidden`.
+- `prefers-reduced-motion` is respected and watched live: animations, the
+  reveal-on-scroll effect and the stat count-up all turn off.
+
+## Assets
+
+Photos are stored at roughly twice their largest rendered size and no more — the whole
+page ships about 180 KB of images. If you replace one, resize it first:
+
+- `logo.png` — 480×320, never rendered taller than 72 px
+- `portrait.jpg` — 640×640, the circular hero photo
+- `presenting.jpg` — 1000×1000, cropped to 4:3 in the About card
+
+Replace the CV by overwriting `src/assets/Mohcene_Meradji_CV.pdf` (keep the filename)
+or update the import in `Hero.jsx` and `Contact.jsx`.
+
+The share card in `public/og-image.jpg` is 1200×630.
+
+## Deploying
+
+Once the site has a real domain, change the two `og:image` / `twitter:image` tags in
+`index.html` to absolute URLs (`https://your-domain/og-image.jpg`) and add a
+`<link rel="canonical">` — some crawlers will not resolve a relative image path.
+
 ## Notes
 
 - Fonts (Manrope, Inter, JetBrains Mono) load from Google Fonts in `index.html`.
-- `prefers-reduced-motion` is respected: animations and the reveal-on-scroll effect turn off.
-- Replace the CV by overwriting `src/assets/Mohcene_Meradji_CV.pdf` (keep the filename)
-  or update the import in `Hero.jsx` and `Contact.jsx`.

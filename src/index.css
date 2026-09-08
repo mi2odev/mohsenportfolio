@@ -1,71 +1,129 @@
+/* Design tokens — kept in sync with `src/theme.js`. */
+:root {
+  --c-bg: #FAFBFA;
+  --c-surface: #FFFFFF;
+  --c-ink: #1A2421;
+  --c-deep: #0B3D2E;
+  --c-green: #10B981;
+  --c-muted: #5B6B64;
+  --c-line: #E5EBE8;
+
+  --shadow-lift: 0 8px 30px rgba(11, 61, 46, .08);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+}
+
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
 
 body {
   margin: 0;
-  background: #FAFBFA;
-  color: #1A2421;
+  background: var(--c-bg);
+  color: var(--c-ink);
   font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
-a { color: #0B3D2E; text-decoration: none; transition: color .3s ease; }
-a:hover { color: #10B981; }
+/* Set while the mobile menu is open so the page behind it cannot scroll. */
+body.is-locked { overflow: hidden; }
+
+a { color: var(--c-deep); text-decoration: none; transition: color .3s ease; }
+a:hover { color: var(--c-green); }
 button { font: inherit; color: inherit; }
-::selection { background: rgba(16,185,129,.18); color: #0B3D2E; }
+img, svg { display: block; }
+::selection { background: rgba(16, 185, 129, .18); color: var(--c-deep); }
+
+/* ---------- accessibility ---------- */
+
+:focus-visible {
+  outline: 2px solid var(--c-green);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 300;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: var(--c-deep);
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 600;
+  transform: translateY(-160%);
+  transition: transform .25s ease;
+}
+.skip-link:focus-visible { transform: none; color: #FFFFFF; }
 
 /* ---------- interactive states ---------- */
 
-.nav-link { color: #5B6B64; transition: color .3s ease; }
-.nav-link:hover { color: #0B3D2E; }
+.nav-link { color: var(--c-muted); transition: color .3s ease; }
+.nav-link:hover, .nav-link[aria-current='true'] { color: var(--c-deep); }
 
 .btn-primary {
-  background: #10B981; color: #FFFFFF;
+  background: var(--c-green); color: #FFFFFF;
   transition: background .3s ease, color .3s ease, transform .3s ease;
 }
-.btn-primary:hover { background: #0B3D2E; color: #FFFFFF; transform: translateY(-2px); }
+.btn-primary:hover { background: var(--c-deep); color: #FFFFFF; transform: translateY(-2px); }
 
 .btn-outline {
-  background: transparent; color: #0B3D2E; border: 1px solid #0B3D2E;
+  background: transparent; color: var(--c-deep); border: 1px solid var(--c-deep);
   transition: background .3s ease, color .3s ease, border-color .3s ease;
 }
-.btn-outline:hover { background: #0B3D2E; color: #FFFFFF; border-color: #0B3D2E; }
+.btn-outline:hover { background: var(--c-deep); color: #FFFFFF; border-color: var(--c-deep); }
 
-.btn-white { background: #FFFFFF; color: #0B3D2E; transition: background .3s ease, color .3s ease; }
-.btn-white:hover { background: #10B981; color: #FFFFFF; }
+.btn-white { background: #FFFFFF; color: var(--c-deep); transition: background .3s ease, color .3s ease; }
+.btn-white:hover { background: var(--c-green); color: #FFFFFF; }
 
-.btn-dark { background: #0B3D2E; color: #FFFFFF; transition: background .3s ease, color .3s ease; }
-.btn-dark:hover { background: #10B981; color: #FFFFFF; }
+.btn-dark { background: var(--c-deep); color: #FFFFFF; transition: background .3s ease, color .3s ease; }
+.btn-dark:hover { background: var(--c-green); color: #FFFFFF; }
 
-.btn-green { background: #10B981; color: #FFFFFF; transition: background .3s ease, color .3s ease; }
-.btn-green:hover { background: #0B3D2E; color: #FFFFFF; }
+.btn-green { background: var(--c-green); color: #FFFFFF; transition: background .3s ease, color .3s ease; }
+.btn-green:hover { background: var(--c-deep); color: #FFFFFF; }
 
-.icon-btn { border: 1px solid #E5EBE8; transition: border-color .3s ease; }
-.icon-btn:hover { border-color: #10B981; }
+.icon-btn { border: 1px solid var(--c-line); transition: border-color .3s ease; }
+.icon-btn:hover { border-color: var(--c-green); }
 
-.hover-border { border: 1px solid #E5EBE8; transition: border-color .35s ease; }
-.hover-border:hover { border-color: #10B981; }
+.hover-border { border: 1px solid var(--c-line); transition: border-color .35s ease; }
+.hover-border:hover { border-color: var(--c-green); }
 
-.lift { border: 1px solid #E5EBE8; transition: border-color .35s ease, transform .35s ease; }
-.lift:hover { border-color: #10B981; transform: translateY(-4px); }
+.lift { border: 1px solid var(--c-line); transition: border-color .35s ease, transform .35s ease; }
+.lift:hover { border-color: var(--c-green); transform: translateY(-4px); }
 
 .lift-shadow {
-  border: 1px solid #E5EBE8;
+  border: 1px solid var(--c-line);
   transition: border-color .35s ease, transform .35s ease, box-shadow .35s ease;
 }
 .lift-shadow:hover {
-  border-color: #10B981;
+  border-color: var(--c-green);
   transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(11,61,46,.08);
+  box-shadow: var(--shadow-lift);
 }
 
 .chip-hover {
-  background: #FFFFFF; color: #1A2421; border: 1px solid #E5EBE8;
+  background: var(--c-surface); color: var(--c-ink); border: 1px solid var(--c-line);
   transition: background .3s ease, color .3s ease, border-color .3s ease, transform .3s ease;
 }
-.chip-hover:hover { background: #10B981; color: #FFFFFF; border-color: #10B981; transform: translateY(-3px); }
+.chip-hover:hover {
+  background: var(--c-green); color: #FFFFFF; border-color: var(--c-green);
+  transform: translateY(-3px);
+}
+
+/* Journey stage picker — a real button that should look like plain content. */
+.stage-btn {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
 
 /* ---------- keyframes ---------- */
 
@@ -82,6 +140,9 @@ button { font: inherit; color: inherit; }
 @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 @keyframes stir { 0%,100% { transform: scaleX(1); } 50% { transform: scaleX(.3); } }
 @keyframes haloSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes panelIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+.panel-in { animation: panelIn .3s var(--ease-out) both; }
 
 @media (prefers-reduced-motion: reduce) {
   * {

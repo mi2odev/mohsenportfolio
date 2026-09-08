@@ -1,4 +1,4 @@
-import { C, F, section, wrap, h2, pad } from '../theme.js';
+import { C, F, section, wrap, h2, pad, mono } from '../theme.js';
 import SectionHead from './SectionHead.jsx';
 import { SKILLS } from '../data.js';
 import { ICONS } from './Icons.jsx';
@@ -23,7 +23,7 @@ export default function Skills() {
                 style={{ padding: 22, borderRadius: 18, background: C.bg }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 22 }}>
-                  <span style={{ fontFamily: F.mono, fontSize: 10, letterSpacing: '0.12em', color: C.green }}>
+                  <span aria-hidden="true" style={mono(10, { color: C.green })}>
                     {pad(i + 1)}
                   </span>
                   <Icon size={26} />

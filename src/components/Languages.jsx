@@ -5,7 +5,7 @@ import { LANGS } from '../data.js';
 export default function Languages() {
   return (
     <section id="languages" style={{ ...section, background: C.surface }}>
-      <div style={wrap(1000)}>
+      <div style={wrap()}>
         <SectionHead num="09" label="Languages" />
         <h2 data-reveal="0" style={{ ...h2, margin: '0 0 clamp(28px,3.5vw,44px)' }}>
           Languages
@@ -19,26 +19,15 @@ export default function Languages() {
               className="lift-shadow"
               style={{ position: 'relative', overflow: 'hidden', padding: '26px 24px', borderRadius: 18, background: C.bg }}
             >
-              <span
-                aria-hidden="true"
-                className="no-print"
+              <div
                 style={{
-                  position: 'absolute',
-                  right: 6,
-                  bottom: -26,
-                  fontFamily: F.display,
-                  fontWeight: 800,
-                  fontSize: 104,
-                  lineHeight: 1,
-                  color: 'rgba(11,61,46,.05)',
-                  pointerEvents: 'none',
-                  userSelect: 'none'
+                  position: 'relative',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 18
                 }}
               >
-                {l.glyph}
-              </span>
-
-              <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 18 }}>
                 <span
                   style={{
                     position: 'relative',

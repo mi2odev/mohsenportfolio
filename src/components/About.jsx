@@ -172,7 +172,8 @@ export default function About({ stats, statsRef }) {
                   letterSpacing: '-0.03em',
                   fontSize: 'clamp(2rem,3.6vw,2.75rem)',
                   lineHeight: 1,
-                  color: C.deep
+                  color: C.deep,
+                  fontVariantNumeric: 'tabular-nums'
                 }}
               >
                 {s.shown}

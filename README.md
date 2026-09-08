@@ -196,9 +196,26 @@ The share card served to Facebook, LinkedIn and X is `public/og-image.jpg` at
 
 ## Deploying
 
-Once the site has a real domain, change the two `og:image` / `twitter:image` tags in
-`index.html` to absolute URLs (`https://your-domain/og-image.jpg`) and add a
-`<link rel="canonical">` — some crawlers will not resolve a relative image path.
+The site is set up for Netlify. `netlify.toml` holds the build command, the publish
+directory, the Node version, and the cache and security headers, so connecting the
+repository is all that is needed — there is nothing to configure in the dashboard.
+
+Connect it once, at
+<https://app.netlify.com/projects/mohcene-meradji> → Build & deploy → Link repository,
+and pick `mi2odev/mohsenportfolio`. Every push to `main` then deploys itself.
+
+The caching rules matter: everything Vite emits under `/assets` is fingerprinted, so
+those files are marked `immutable` for a year, while `index.html` is always
+revalidated. Without that split a returning visitor can hold a cached page that points
+at asset filenames a later deploy no longer has.
+
+### If the domain changes
+
+Four values in `index.html` are absolute, because crawlers will not resolve a relative
+`og:image`: the `canonical` link, `og:url`, `og:image`, `twitter:image`, plus `url`
+and `image` in the JSON-LD block. They currently point at
+`https://mohcene-meradji.netlify.app`. Change all of them together when the site moves
+to a custom domain, or if you deploy it as a differently named Netlify project.
 
 ## Fonts
 

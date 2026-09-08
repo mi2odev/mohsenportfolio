@@ -51,7 +51,7 @@ export default function Certifications() {
                     minHeight: 56
                   }}
                 >
-                  <span aria-hidden="true" style={{ flex: '0 0 auto', ...mono(10, { color: C.green }) }}>
+                  <span aria-hidden="true" style={{ flex: '0 0 auto', ...mono(10, { color: C.greenInk }) }}>
                     {pad(i + 1)}
                   </span>
                   <span

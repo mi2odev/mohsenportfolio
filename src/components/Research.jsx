@@ -126,7 +126,7 @@ export default function Research() {
           </div>
 
           <div style={{ flex: '1.25 1 380px', minWidth: 0, padding: 'clamp(28px,4vw,48px)', background: C.surface }}>
-            <span style={mono(11, { color: C.green })}>Featured Research</span>
+            <span style={mono(11, { color: C.greenInk })}>Featured Research</span>
             <h2
               style={{
                 margin: '16px 0 0',

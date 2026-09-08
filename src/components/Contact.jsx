@@ -152,7 +152,7 @@ export default function Contact() {
               <span
                 role="status"
                 style={{
-                  ...mono(10, { color: C.green }),
+                  ...mono(10, { color: C.greenInk }),
                   transition: 'opacity .3s ease',
                   opacity: copied ? 1 : 0
                 }}

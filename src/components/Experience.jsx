@@ -49,7 +49,7 @@ export default function Experience() {
                 </div>
 
                 <div style={{ minWidth: 0 }}>
-                  <div style={mono(10, { color: C.green })}>{job.year}</div>
+                  <div style={mono(10, { color: C.greenInk })}>{job.year}</div>
                   <h3
                     style={{
                       margin: '8px 0 0',

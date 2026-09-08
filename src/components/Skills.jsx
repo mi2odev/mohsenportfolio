@@ -30,7 +30,7 @@ export default function Skills() {
                     marginBottom: 22
                   }}
                 >
-                  <span aria-hidden="true" style={mono(10, { color: C.green })}>
+                  <span aria-hidden="true" style={mono(10, { color: C.greenInk })}>
                     {pad(i + 1)}
                   </span>
                   <Icon size={26} />

@@ -1,0 +1,93 @@
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: #FAFBFA;
+  color: #1A2421;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: #0B3D2E; text-decoration: none; transition: color .3s ease; }
+a:hover { color: #10B981; }
+button { font: inherit; color: inherit; }
+::selection { background: rgba(16,185,129,.18); color: #0B3D2E; }
+
+/* ---------- interactive states ---------- */
+
+.nav-link { color: #5B6B64; transition: color .3s ease; }
+.nav-link:hover { color: #0B3D2E; }
+
+.btn-primary {
+  background: #10B981; color: #FFFFFF;
+  transition: background .3s ease, color .3s ease, transform .3s ease;
+}
+.btn-primary:hover { background: #0B3D2E; color: #FFFFFF; transform: translateY(-2px); }
+
+.btn-outline {
+  background: transparent; color: #0B3D2E; border: 1px solid #0B3D2E;
+  transition: background .3s ease, color .3s ease, border-color .3s ease;
+}
+.btn-outline:hover { background: #0B3D2E; color: #FFFFFF; border-color: #0B3D2E; }
+
+.btn-white { background: #FFFFFF; color: #0B3D2E; transition: background .3s ease, color .3s ease; }
+.btn-white:hover { background: #10B981; color: #FFFFFF; }
+
+.btn-dark { background: #0B3D2E; color: #FFFFFF; transition: background .3s ease, color .3s ease; }
+.btn-dark:hover { background: #10B981; color: #FFFFFF; }
+
+.btn-green { background: #10B981; color: #FFFFFF; transition: background .3s ease, color .3s ease; }
+.btn-green:hover { background: #0B3D2E; color: #FFFFFF; }
+
+.icon-btn { border: 1px solid #E5EBE8; transition: border-color .3s ease; }
+.icon-btn:hover { border-color: #10B981; }
+
+.hover-border { border: 1px solid #E5EBE8; transition: border-color .35s ease; }
+.hover-border:hover { border-color: #10B981; }
+
+.lift { border: 1px solid #E5EBE8; transition: border-color .35s ease, transform .35s ease; }
+.lift:hover { border-color: #10B981; transform: translateY(-4px); }
+
+.lift-shadow {
+  border: 1px solid #E5EBE8;
+  transition: border-color .35s ease, transform .35s ease, box-shadow .35s ease;
+}
+.lift-shadow:hover {
+  border-color: #10B981;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(11,61,46,.08);
+}
+
+.chip-hover {
+  background: #FFFFFF; color: #1A2421; border: 1px solid #E5EBE8;
+  transition: background .3s ease, color .3s ease, border-color .3s ease, transform .3s ease;
+}
+.chip-hover:hover { background: #10B981; color: #FFFFFF; border-color: #10B981; transform: translateY(-3px); }
+
+/* ---------- keyframes ---------- */
+
+@keyframes helixSpin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+@keyframes drift { 0% { transform: translate3d(0,0,0); } 50% { transform: translate3d(10px,-22px,0); } 100% { transform: translate3d(0,0,0); } }
+@keyframes nodePulse { 0%,100% { opacity: .28; } 50% { opacity: .85; } }
+@keyframes bubble { 0% { transform: translateY(0) scale(.6); opacity: 0; } 20% { opacity: .7; } 100% { transform: translateY(-46px) scale(1); opacity: 0; } }
+@keyframes flow { from { background-position: 0 0; } to { background-position: 24px 0; } }
+@keyframes wordIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+@keyframes chev { 0%,100% { transform: translateY(0); opacity: .35; } 50% { transform: translateY(7px); opacity: 1; } }
+@keyframes dotPulse { 0% { box-shadow: 0 0 0 0 rgba(16,185,129,.5); } 70% { box-shadow: 0 0 0 9px rgba(16,185,129,0); } 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); } }
+@keyframes slowSpin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+@keyframes dashFlow { to { stroke-dashoffset: -120; } }
+@keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes stir { 0%,100% { transform: scaleX(1); } 50% { transform: scaleX(.3); } }
+@keyframes haloSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
